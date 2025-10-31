@@ -130,3 +130,64 @@ function cargarEstilo(path) {
       console.warn(`⚠️ Error al intentar cargar CSS: ${path}`);
     });
 }
+
+// === AGREGAR ESTAS FUNCIONES AL FINAL DEL ARCHIVO ===
+
+// Función para configurar dashboard según rol
+async function configurarDashboardPorRol() {
+  try {
+    const res = await fetch('/api/usuarios/me', { credentials: 'include' });
+    const data = await res.json();
+    const rol = data.usuario.rol;
+
+    // Actualizar info de usuario en sidebar
+    document.getElementById('nombreUsuario').textContent = `Hola, ${data.usuario.nombre}`;
+    document.getElementById('rolUsuario').textContent = rol;
+
+    // Ocultar módulos no permitidos
+    ocultarModulosNoPermitidos(rol);
+    
+    // Cargar módulo por defecto según rol
+    cargarModuloPorDefecto(rol);
+  } catch (error) {
+    console.error('Error al cargar datos de usuario:', error);
+  }
+}
+
+// Función para ocultar módulos según rol
+function ocultarModulosNoPermitidos(rol) {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const permisos = {
+    'Administrador': ['usuarios', 'productos', 'mesas', 'reservas', 'reportes', 'auditoria'],
+    'Mozo': ['mesas', 'pedidos', 'reservas'],
+    'Cocinero': ['cocina'],
+    'Cajero': ['caja', 'pedidos']
+  };
+
+  navLinks.forEach(link => {
+    const modulo = link.getAttribute('data-page');
+    if (permisos[rol] && !permisos[rol].includes(modulo)) {
+      link.style.display = 'none';
+    }
+  });
+}
+
+// Función para cargar módulo por defecto
+function cargarModuloPorDefecto(rol) {
+  const modulosDefecto = {
+    'Administrador': 'usuarios',
+    'Mozo': 'pedidos',
+    'Cocinero': 'cocina',
+    'Cajero': 'caja'
+  };
+  
+  const modulo = modulosDefecto[rol];
+  if (modulo) {
+    // Simular click en el módulo correspondiente
+    const link = document.querySelector(`[data-page="${modulo}"]`);
+    if (link) link.click();
+  }
+}
+
+// Ejecutar cuando cargue la página
+document.addEventListener('DOMContentLoaded', configurarDashboardPorRol);

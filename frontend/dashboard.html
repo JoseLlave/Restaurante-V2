@@ -63,5 +63,11 @@
 
   <!-- Script externo -->
   <script src="public/js/dashboard.js"></script>
+
+    <!-- AL FINAL DEL BODY, DESPUÉS DE <script src="public/js/dashboard.js"></script> -->
+  <script>
+  // Inicializar configuración por rol
+  document.addEventListener('DOMContentLoaded', configurarDashboardPorRol);
+  </script>
 </body>
 </html>

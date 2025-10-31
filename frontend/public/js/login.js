@@ -26,12 +26,7 @@ form.addEventListener('submit', async (e) => {
 
     // Redirigir según el rol
     const rol = data.usuario.rol;
-    if (rol === 'Administrador') window.location.href = 'dashboard.html';
-    else if (rol === 'Mesero') window.location.href = 'pedidos.html';
-    else if (rol === 'Cocinero') window.location.href = 'cocina.html';
-    else if (rol === 'Cajero') window.location.href = 'caja.html';
-    else if (rol === 'Recepcionista') window.location.href = 'reservas.html';
-    else window.location.href = 'menu-invitado.html';
+    window.location.href = 'dashboard.html';
   } catch (error) {
     console.error(error);
     msg.textContent = 'No se pudo conectar al servidor';

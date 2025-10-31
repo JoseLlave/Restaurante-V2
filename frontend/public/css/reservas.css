@@ -1,0 +1,225 @@
+/* 🌙 === ESTILOS GENERALES === */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #121215;
+  color: #f1f1f1;
+}
+
+h2, h5 {
+  color: #bb86fc;
+  font-weight: 600;
+}
+
+.sombra-suave {
+  box-shadow: 0 0 10px rgba(187, 134, 252, 0.15);
+}
+
+.campo-oscuro {
+  background-color: #2a2a32 !important;
+  color: #fff !important;
+  border: 1px solid #3b3b45 !important;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.campo-oscuro:focus {
+  border-color: #bb86fc !important;
+  box-shadow: 0 0 5px #bb86fc !important;
+  outline: none !important;
+}
+
+/* 🌸 PLACEHOLDERS */
+.form-control.campo-oscuro::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 🟣 BOTÓN PRINCIPAL */
+.btn-crear {
+  background-color: #bb86fc !important;
+  color: #fff !important;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-crear:hover {
+  background-color: #9a6df2 !important;
+  transform: translateY(-1px);
+}
+
+/* 📦 TARJETAS */
+.card {
+  background-color: #1a1a1f !important;
+  border: 1px solid #2d2d35;
+  border-radius: 12px;
+}
+
+/* === MAPA DE RESERVAS === */
+#mapaReservasContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  background-color: #111;
+  border: 2px solid #444;
+  overflow: hidden;
+}
+
+#imagenPisoReserva {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.9;
+  border-radius: 10px;
+}
+
+#mesasMapaReservas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 🪑 Mesas en el mapa */
+.mesa-circulo {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.2s;
+}
+
+.mesa-circulo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Colores según estado */
+.mesa-libre {
+  background-color: #00cc88;
+}
+.mesa-ocupada {
+  background-color: #ff4444;
+}
+.mesa-reservada {
+  background-color: #ffaa00;
+}
+
+/* 🕓 Reloj en vivo */
+#relojReserva {
+  font-size: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-left: 2px solid #bb86fc;
+  border-radius: 8px 0 0 8px;
+}
+
+/* === SELECTOR DE VISTA === */
+#vistaTipo {
+  background-color: #2a2a32 !important;
+  color: #fff !important;
+  border: 1px solid #3b3b45 !important;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+#vistaTipo:focus {
+  border-color: #bb86fc !important;
+  box-shadow: 0 0 5px #bb86fc !important;
+}
+
+/* === TABLA DE RESERVAS === */
+.table-dark {
+  --bs-table-bg: #1a1a1f;
+  --bs-table-striped-bg: #2a2a32;
+  --bs-table-striped-color: #fff;
+  --bs-table-active-bg: #3b3b45;
+  --bs-table-active-color: #fff;
+  --bs-table-hover-bg: #2a2a32;
+  --bs-table-hover-color: #fff;
+  color: #fff;
+  border-color: #3b3b45;
+}
+
+.table-dark thead th {
+  background-color: #2a2a32;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.table-dark td {
+  border-color: #3b3b45;
+  color: #e2e8f0;
+}
+
+.badge {
+  font-size: 0.75em;
+}
+
+.bg-success {
+  background-color: #00cc88 !important;
+}
+.bg-danger {
+  background-color: #ff4444 !important;
+}
+.bg-warning {
+  background-color: #ffaa00 !important;
+  color: #000 !important;
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#vistaTabla {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* === Ajuste adicional para centrar el mapa === */
+#mapaReservasContainer {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#imagenPisoReserva {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* 🪑 Asegura que las mesas se vean sobre la imagen */
+#mesasMapaReservas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* evita solapamiento con formulario */
+}
+
+.mesa-circulo {
+  pointer-events: auto;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración - Mr. Queen</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- CSS Dashboard -->
+  <link href="public/css/dashboard.css" rel="stylesheet" />
+
+  <!-- Fuentes e íconos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="profile text-center mt-3">
+        <img src="public/img/usuario.png" alt="Usuario" class="profile-img" />
+        <h5 id="nombreUsuario">Hola, Admin</h5>
+        <p id="rolUsuario" class="text-muted">Administrador</p>
+      </div>
+
+      <nav class="menu mt-4">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a href="#" class="nav-link active" data-page="usuarios"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" data-page="productos"><i class="fa-solid fa-utensils"></i> Productos</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" data-page="mesas"><i class="fa-solid fa-chair"></i> Mesas</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" data-page="pedidos"><i class="fa-solid fa-receipt"></i> Pedidos</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" data-page="cocina"><i class="fa-solid fa-fire-burner"></i> Cocina</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" data-page="caja"><i class="fa-solid fa-cash-register"></i> Caja</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" data-page="reservas"><i class="fa-solid fa-calendar-check"></i> Reservas</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" data-page="reportes"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+        </ul>
+      </nav>
+
+      <div class="logout-section text-center mt-auto mb-3">
+        <button id="btnCerrarSesion" class="btn btn-danger w-75">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div id="contenidoPrincipal" class="p-4">
+        <h2 class="section-title">👑 Panel de Administración - Mr. Queen</h2>
+        <p class="text-light">Selecciona un módulo del menú lateral para comenzar.</p>
+        <hr class="divider">
+
+        <section id="vistaActiva">
+          <!-- Aquí se carga el contenido según el módulo -->
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Script externo -->
+  <script src="public/js/dashboard.js"></script>
+</body>
+</html>

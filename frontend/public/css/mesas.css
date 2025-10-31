@@ -1,0 +1,339 @@
+/* === Estilos generales === */
+.mesas-module {
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-title {
+  color: #bb86fc;
+  font-weight: 600;
+  border-bottom: 2px solid #bb86fc;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.card {
+  background-color: #1a1a1f !important;
+  border: 1px solid #2d2d35;
+  border-radius: 12px;
+}
+
+.sombra-suave {
+  box-shadow: 0 0 10px rgba(187, 134, 252, 0.1);
+}
+
+.campo-oscuro {
+  background-color: #2a2a32 !important;
+  color: #fff !important;
+  border: 1px solid #3b3b45 !important;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.campo-oscuro:focus {
+  border-color: #bb86fc !important;
+  box-shadow: 0 0 5px #bb86fc !important;
+  outline: none !important;
+}
+
+/* Estilos específicos para inputs y selects en formularios */
+.form-control.campo-oscuro {
+  background-color: #2a2a32 !important;
+  color: #ffffff !important;
+  border: 1px solid #3b3b45 !important;
+}
+
+.form-control.campo-oscuro::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.form-control.campo-oscuro option {
+  background-color: #2a2a32;
+  color: #ffffff;
+}
+
+.form-control.campo-oscuro:focus {
+  background-color: #2a2a32;
+  color: #ffffff;
+  border-color: #bb86fc !important;
+  box-shadow: 0 0 5px #bb86fc !important;
+}
+
+/* Estilos para etiquetas de formulario */
+.form-label {
+  color: #e2e8f0 !important;
+  font-weight: 500;
+}
+
+.btn-crear {
+  background-color: #bb86fc !important;
+  color: #fff !important;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-crear:hover {
+  background-color: #9a6df2 !important;
+  transform: translateY(-1px);
+}
+
+/* === MAPA === */
+#mapaMesasContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  background-color: #111;
+  border: 2px solid #444;
+  overflow: hidden;
+}
+
+#mapaMesasContainer img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+#mesasMapa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mesa-circulo {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.15s ease-in-out, box-shadow 0.2s;
+  font-weight: bold;
+}
+
+.mesa-circulo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* === PANEL DE EDICIÓN === */
+#editorMesaContainer {
+  background: #1e1e1e;
+  color: #fff;
+  border: 1px solid #3d3d3d;
+  border-radius: 12px;
+  padding: 15px;
+  width: 260px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: none;
+  box-shadow: 0 0 20px rgba(187, 134, 252, 0.3);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+#editorMesaContainer h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #bb86fc;
+  margin-bottom: 10px;
+}
+
+#editorMesaContainer h3 button {
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+#editorMesaContainer h3 button:hover {
+  color: #bb86fc;
+}
+
+#editorMesaContainer label {
+  font-size: 0.9rem;
+  margin-top: 6px;
+  color: #ddd;
+}
+
+#editorMesaContainer input,
+#editorMesaContainer select {
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  margin-bottom: 10px;
+}
+
+#editorMesaContainer .botones {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+#editorMesaContainer .botones button {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 6px 0;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+#btnGuardarMesa {
+  background-color: #bb86fc;
+  color: #fff;
+}
+
+#btnGuardarMesa:hover {
+  background-color: #9a6df2;
+}
+
+#btnEliminarMesa {
+  background-color: #ff4b4b;
+  color: #fff;
+}
+
+#btnEliminarMesa:hover {
+  background-color: #d63031;
+}
+
+#btnCancelarMesa {
+  background-color: #444;
+  color: #fff;
+}
+
+#btnCancelarMesa:hover {
+  background-color: #666;
+}
+
+/* === ESTILOS PARA LA TABLA === */
+.table-dark {
+  --bs-table-bg: #1a1a1f;
+  --bs-table-striped-bg: #2a2a32;
+  --bs-table-striped-color: #fff;
+  --bs-table-active-bg: #3b3b45;
+  --bs-table-active-color: #fff;
+  --bs-table-hover-bg: #2a2a32;
+  --bs-table-hover-color: #fff;
+  color: #fff;
+  border-color: #3b3b45;
+}
+
+/* Headers de la tabla */
+.table-dark thead th {
+  background-color: #2a2a32;
+  color: #e2e8f0;
+  border-color: #3b3b45;
+  font-weight: 600;
+}
+
+/* Celdas de la tabla */
+.table-dark td {
+  border-color: #3b3b45;
+  color: #e2e8f0;
+}
+
+/* Badges en la tabla */
+.badge {
+  font-size: 0.75em;
+}
+
+.bg-success {
+  background-color: #00cc88 !important;
+}
+
+.bg-danger {
+  background-color: #ff4444 !important;
+}
+
+.bg-warning {
+  background-color: #ffaa00 !important;
+  color: #000 !important;
+}
+
+.bg-info {
+  background-color: #0099ff !important;
+}
+
+.bg-secondary {
+  background-color: #999999 !important;
+}
+
+/* Botones en la tabla */
+.btn-outline-primary {
+  color: #bb86fc;
+  border-color: #bb86fc;
+}
+
+.btn-outline-primary:hover {
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+  color: #1a1a1f;
+}
+
+.btn-outline-danger {
+  color: #ff4b4b;
+  border-color: #ff4b4b;
+}
+
+.btn-outline-danger:hover {
+  background-color: #ff4b4b;
+  border-color: #ff4b4b;
+  color: #1a1a1f;
+}
+
+/* Mensajes de feedback */
+.msg.text-success {
+  color: #00cc88 !important;
+  font-weight: 500;
+}
+
+.msg.text-danger {
+  color: #ff4444 !important;
+  font-weight: 500;
+}
+
+/* Títulos de secciones */
+.section-title {
+  color: #bb86fc;
+  font-weight: 600;
+}
+
+.card h5 {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

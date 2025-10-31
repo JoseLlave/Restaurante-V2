@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Restaurante Mr. Queen</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/index.css">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+</head>
+<body>
+
+  <!-- 🌙 ENCABEZADO -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand fw-bold fs-4 text-light" href="#">Restaurant Mr. Queen</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav me-3">
+          <li class="nav-item"><a class="nav-link active" href="#entradas">Entradas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#platos">Platos principales</a></li>
+          <li class="nav-item"><a class="nav-link" href="#postres">Postres</a></li>
+          <li class="nav-item"><a class="nav-link" href="#bebidas">Bebidas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#seguimiento">Seguimiento</a></li>
+        </ul>
+        <a href="login.html" class="btn btn-login">Iniciar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🍇 CARRUSEL PRINCIPAL -->
+  <section id="inicio" class="mt-5 pt-4">
+    <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="public/img/carrusel01.jpg" class="d-block w-100" alt="Comidas Gourmet">
+        </div>
+        <div class="carousel-item">
+          <img src="public/img/carrusel02.jpg" class="d-block w-100" alt="Postres">
+          <div class="carousel-caption">
+            <h1 class="fw-bold text-shadow" style="font-size: 3rem; font-family: 'Great Vibes', cursive;">Postres con arte</h1>
+            <p style="font-size: 1.5rem; font-style: italic;">Dulces momentos que te enamorarán</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="public/img/carrusel03.jpg" class="d-block w-100" alt="Bebidas">
+          <div class="carousel-caption">
+            <h1 class="fw-bold text-shadow" style="font-size: 3rem; font-family: 'Great Vibes', cursive;">Bebidas exclusivas</h1>
+            <p style="font-size: 1.5rem; font-style: italic;">La combinación perfecta para cada plato</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 🥖 ENTRADAS -->
+  <section id="entradas" class="seccion py-5 bg-dark text-light">
+    <div class="container text-center">
+      <h2 class="seccion-titulo mb-4">Entradas</h2>
+      <div class="swiper entradasSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="card item-card">
+              <img src="public/img/entrada01.jpg" class="card-img-top" alt="Ceviche clásico">
+              <div class="card-body">
+                <h5 class="card-title">Ceviche clásico</h5>
+                <p class="card-text">Pescado fresco marinado con limón, cebolla y ají al estilo peruano.</p>
+                <p class="fw-bold text-primary">S/ 25.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card item-card">
+              <img src="public/img/entrada02.jpg" class="card-img-top" alt="Tequeños de queso">
+              <div class="card-body">
+                <h5 class="card-title">Tequeños de queso</h5>
+                <p class="card-text">Crujientes y dorados, rellenos con queso fundido y guacamole casero.</p>
+                <p class="fw-bold text-primary">S/ 18.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card item-card">
+              <img src="public/img/entrada03.jpg" class="card-img-top" alt="Bruschettas clásicas">
+              <div class="card-body">
+                <h5 class="card-title">Bruschettas clásicas</h5>
+                <p class="card-text">Pan tostado con tomate fresco, albahaca y aceite de oliva.</p>
+                <p class="fw-bold text-primary">S/ 30.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card item-card">
+              <img src="public/img/entrada04.jpg" class="card-img-top" alt="Croquetas de jamón">
+              <div class="card-body">
+                <h5 class="card-title">Croquetas de jamón</h5>
+                <p class="card-text">Bechamel cremosa y jamón serrano en una costra dorada.</p>
+                <p class="fw-bold text-primary">S/ 22.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🍛 PLATOS PRINCIPALES -->
+  <section id="platos" class="seccion py-5">
+    <div class="container text-center">
+      <h2 class="seccion-titulo mb-4">Platos Principales</h2>
+      <div class="swiper platosSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/plato01.jpg" class="card-img-top" alt="Lomo Saltado"><div class="card-body"><h5 class="card-title">Lomo Saltado</h5><p class="card-text">Clásico salteado de carne con cebolla, tomate y papas crocantes.</p><p class="fw-bold text-primary">S/ 22.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/plato02.jpg" class="card-img-top" alt="Risotto de mariscos"><div class="card-body"><h5 class="card-title">Risotto de mariscos</h5><p class="card-text">Arroz cremoso con langostinos, calamares y vino blanco.</p><p class="fw-bold text-primary">S/ 35.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/plato03.jpg" class="card-img-top" alt="Salmón a la plancha"><div class="card-body"><h5 class="card-title">Salmón a la plancha</h5><p class="card-text">Con verduras grilladas y mantequilla de limón.</p><p class="fw-bold text-primary">S/ 25.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/plato04.jpg" class="card-img-top" alt="Fettuccine Alfredo"><div class="card-body"><h5 class="card-title">Fettuccine Alfredo</h5><p class="card-text">Pasta fresca con salsa Alfredo, pollo grillado y parmesano.</p><p class="fw-bold text-primary">S/ 25.00</p></div></div></div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🍰 POSTRES -->
+  <section id="postres" class="seccion py-5 bg-dark text-light">
+    <div class="container text-center">
+      <h2 class="seccion-titulo mb-4">Postres</h2>
+      <div class="swiper postresSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><div class="card item-card"><img src="public/img/postre01.jpg" class="card-img-top" alt="Cheesecake"><div class="card-body"><h5 class="card-title">Cheesecake de frutos rojos</h5><p class="card-text">Cremoso y ligero, con mermelada casera de berries.</p><p class="fw-bold text-primary">S/ 8.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card"><img src="public/img/postre02.jpg" class="card-img-top" alt="Selva Negra"><div class="card-body"><h5 class="card-title">Torta Selva Negra</h5><p class="card-text">Bizcocho de chocolate, cerezas y crema chantilly.</p><p class="fw-bold text-primary">S/ 10.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card"><img src="public/img/postre03.jpg" class="card-img-top" alt="Torta de Chocolate"><div class="card-body"><h5 class="card-title">Torta de Chocolate</h5><p class="card-text">Húmeda, intensa, con ganache artesanal. La favorita.</p><p class="fw-bold text-primary">S/ 12.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card"><img src="public/img/postre04.jpg" class="card-img-top" alt="Volcán de chocolate"><div class="card-body"><h5 class="card-title">Volcán de chocolate</h5><p class="card-text">Corazón líquido de cacao con helado de vainilla.</p><p class="fw-bold text-primary">S/ 15.00</p></div></div></div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🍹 BEBIDAS -->
+  <section id="bebidas" class="seccion py-5">
+    <div class="container text-center">
+      <h2 class="seccion-titulo mb-4">Bebidas</h2>
+      <div class="swiper bebidasSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/bebida01.jpg" class="card-img-top" alt="Cóctel Rosé"><div class="card-body"><h5 class="card-title">Cóctel Rosé</h5><p class="card-text">Refrescante mezcla con notas frutales y florales.</p><p class="fw-bold text-primary">S/ 15.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/bebida02.jpg" class="card-img-top" alt="Limonada Real"><div class="card-body"><h5 class="card-title">Limonada Real</h5><p class="card-text">Natural y ligera, perfecta para acompañar tus comidas.</p><p class="fw-bold text-primary">S/ 12.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/bebida03.jpg" class="card-img-top" alt="Mojito maracuyá"><div class="card-body"><h5 class="card-title">Mojito de maracuyá</h5><p class="card-text">Toque tropical con hierbabuena y fruta fresca.</p><p class="fw-bold text-primary">S/ 10.00</p></div></div></div>
+          <div class="swiper-slide"><div class="card item-card shadow"><img src="public/img/bebida04.jpg" class="card-img-top" alt="Café frappé"><div class="card-body"><h5 class="card-title">Café Frappé</h5><p class="card-text">Granizado artesanal de café con crema batida.</p><p class="fw-bold text-primary">S/ 10.00</p></div></div></div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🧾 SEGUIMIENTO -->
+  <section id="seguimiento" class="py-5 bg-dark text-light text-center">
+    <div class="container">
+      <h2 class="mb-3">Seguimiento de Pedido</h2>
+      <p class="mb-4">Ingresa tu código de pedido para conocer su estado.</p>
+      <form class="d-flex justify-content-center">
+        <input type="text" class="form-control w-50 me-2" placeholder="Código de pedido">
+        <button type="submit" class="btn btn-login">Consultar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ⚫ PIE -->
+  <footer class="text-center py-3 bg-black text-muted">
+    © 2025 Restaurante Mr. Queen — Todos los derechos reservados
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <script>
+    const opciones = {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      grabCursor: true,
+      breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 992: { slidesPerView: 3 } }
+    };
+    new Swiper('.entradasSwiper', opciones);
+    new Swiper('.platosSwiper', opciones);
+    new Swiper('.postresSwiper', opciones);
+    new Swiper('.bebidasSwiper', opciones);
+  </script>
+</body>
+</html>

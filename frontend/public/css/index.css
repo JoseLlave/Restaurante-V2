@@ -1,0 +1,142 @@
+/* === Body & fuentes === */
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === Navbar === */
+.navbar {
+  background: rgba(10, 10, 15, 0.95) !important;
+  backdrop-filter: blur(6px);
+}
+.nav-link {
+  color: #ccc !important;
+  margin-right: 10px;
+  transition: color 0.3s;
+}
+.nav-link:hover {
+  color: #ffbde8 !important;
+}
+.btn-login {
+  background: linear-gradient(135deg, #f3a6ff, #a7b8ff);
+  border: none;
+  color: #1a1a1d;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.btn-login:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ffb6d9, #cbb2ff);
+}
+
+/* === Carrusel Principal === */
+#mainCarousel .carousel-item img {
+  height: 80vh;
+  object-fit: cover;
+  filter: brightness(70%);
+  transition: opacity 1s ease-in-out;
+}
+#mainCarousel .carousel-caption {
+  bottom: 25%;
+  animation: fadeUp 1.2s ease forwards;
+}
+#mainCarousel .carousel-caption h1 {
+  font-size: 3rem;
+  font-family: 'Great Vibes', cursive;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+}
+#mainCarousel .carousel-caption p {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #f1e3ff;
+}
+
+/* ✨ Sombra para los textos del carrusel */
+.text-shadow {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* ✨ Animación del texto (fadeUp) */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Secciones === */
+.seccion-titulo {
+  font-weight: 600;
+  color: #f3a6ff;
+}
+.item-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #1e1e25;
+  color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.item-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(243,166,255,0.2);
+}
+.item-card img {
+  height: 240px;
+  object-fit: cover;
+}
+
+/* === Seguimiento === */
+#seguimiento input {
+  border-radius: 10px;
+  border: 1px solid #555;
+  background: #222;
+  color: #fff;
+}
+#seguimiento input:focus {
+  border-color: #b38bfa;
+  box-shadow: 0 0 8px #b38bfa66;
+}
+
+/* === Footer === */
+footer {
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* === Swiper Carruseles === */
+.swiper {
+  padding: 25px 10px;
+}
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #f3a6ff;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #ffbde8;
+}
+
+/* Ajuste en hover de tarjetas dentro de swiper */
+.swiper-slide .item-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(243,166,255,0.25);
+}
+
+/* Espaciado entre secciones */
+.seccion {
+  scroll-margin-top: 90px;
+}

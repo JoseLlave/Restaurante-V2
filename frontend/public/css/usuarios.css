@@ -1,0 +1,147 @@
+/* === Estilos específicos del módulo de usuarios === */
+.usuarios-module {
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === Título de sección === */
+.section-title {
+  color: #bb86fc; /* Morado brillante */
+  font-weight: 600;
+  border-bottom: 2px solid #bb86fc;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+/* === Tarjetas (cards) === */
+.card {
+  background-color: #1a1a1f !important;
+  border: 1px solid #2d2d35;
+  border-radius: 12px;
+}
+
+.sombra-suave {
+  box-shadow: 0 0 10px rgba(187, 134, 252, 0.1);
+}
+
+/* === Inputs y selects === */
+.campo-oscuro {
+  background-color: #2a2a32 !important;
+  color: #fff !important;
+  border: 1px solid #3b3b45 !important;
+}
+
+.campo-oscuro:focus {
+  border-color: #bb86fc !important;
+  box-shadow: 0 0 5px #bb86fc !important;
+  outline: none !important;
+}
+
+/* Color del texto de placeholder (Nombre, Correo, etc.) */
+.campo-oscuro::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* === Botón Crear === */
+.btn-crear {
+  background-color: #bb86fc !important;
+  color: #fff !important;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-crear:hover {
+  background-color: #9a6df2 !important;
+  transform: translateY(-1px);
+}
+
+/* === Botón Editar === */
+.btn-editar {
+  background-color: #6c63ff !important; /* Morado suave */
+  color: #fff !important;
+  font-weight: 600;
+  border: none !important;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-editar:hover {
+  background-color: #8a7fff !important; /* Un poco más claro al pasar el mouse */
+  transform: translateY(-1px);
+}
+
+/* === Mensajes === */
+.msg {
+  font-size: 0.9rem;
+}
+
+.msg.text-success {
+  color: #00ffaa !important;
+}
+
+.msg.text-danger {
+  color: #ff6b6b !important;
+}
+
+/* === Tabla de usuarios === */
+.tabla-usuarios {
+  width: 100%;
+  text-align: center; /* Centrar todo el contenido */
+}
+
+.tabla-usuarios th {
+  background-color: #2d2d35;
+  color: #bb86fc;
+  border-bottom: 2px solid #bb86fc;
+  text-align: center;
+}
+
+.tabla-usuarios td {
+  background-color: #1e1e24;
+  color: #ddd;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.tabla-usuarios tr:hover td {
+  background-color: #292932;
+}
+
+/* === Selects dentro de la tabla === */
+.tabla-usuarios select {
+  background-color: #2a2a32;
+  color: #fff;
+  border: 1px solid #3b3b45;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.tabla-usuarios select:focus {
+  border-color: #bb86fc;
+  outline: none;
+}
+
+/* === Mejor separación entre secciones === */
+.usuarios-module h5 {
+  color: #d3b7ff;
+}
+
+/* === Animación de actualización exitosa === */
+@keyframes resaltarFila {
+  0% {
+    background-color: rgba(187, 134, 252, 0.3); /* Morado suave */
+  }
+  50% {
+    background-color: rgba(0, 255, 170, 0.4); /* Verde brillante */
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.fila-actualizada {
+  animation: resaltarFila 1.2s ease-in-out;
+}

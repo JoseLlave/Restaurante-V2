@@ -8,6 +8,7 @@ const {
   logoutUsuario,
   me,
   obtenerUsuarios,
+  obtenerUsuarioPorId,  // ✅ AGREGAR ESTA LÍNEA
   actualizarUsuario,
   eliminarUsuario,
 } = require('../controllers/usuarioController');
@@ -16,31 +17,16 @@ const {
 const auth = require('../middleware/authMiddleware');
 const rol = require('../middleware/rolMiddleware');
 
-/**
- * 🔹 RUTAS PÚBLICAS
- */
-
-// Registrar usuario (solo libre para pruebas)
+// 🔹 RUTAS PÚBLICAS
 router.post('/registrar', registrarUsuario);
-
-// Login y logout
 router.post('/login', loginUsuario);
 router.post('/logout', logoutUsuario);
-
-// Información del usuario autenticado
 router.get('/me', auth, me);
 
-/**
- * 🔹 RUTAS PROTEGIDAS (solo Administrador)
- */
-
-// Obtener todos los usuarios
+// 🔹 RUTAS PROTEGIDAS (solo Administrador)
 router.get('/', auth, rol(['Administrador']), obtenerUsuarios);
-
-// Actualizar usuario
+router.get('/:id', auth, rol(['Administrador']), obtenerUsuarioPorId);  // ✅ NUEVA RUTA
 router.put('/:id', auth, rol(['Administrador']), actualizarUsuario);
-
-// Eliminar usuario
 router.delete('/:id', auth, rol(['Administrador']), eliminarUsuario);
 
 module.exports = router;

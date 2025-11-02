@@ -6,12 +6,15 @@ const {
   actualizarMesa,
   actualizarEstadoMesa,
   eliminarMesa
-} = require('../controllers/mesaController'); // agrega estas funciones
+} = require('../controllers/mesaController');
 
 const proteger = require('../middleware/authMiddleware');
 const verificarRol = require('../middleware/rolMiddleware');
 
-router.get('/', proteger, verificarRol(['Administrador']), getMesas);
+// 🔥 CAMBIAR: Permitir a MOZOS ver mesas (solo lectura)
+router.get('/', proteger, verificarRol(['Administrador', 'Mozo']), getMesas); // ✅ Mozo puede VER
+
+// 🔥 MANTENER: Solo admin puede modificar
 router.post('/', proteger, verificarRol(['Administrador']), crearMesa);
 router.put('/:id', proteger, verificarRol(['Administrador']), actualizarMesa);
 router.put('/:id/estado', proteger, verificarRol(['Administrador']), actualizarEstadoMesa);

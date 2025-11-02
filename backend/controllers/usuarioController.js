@@ -159,6 +159,39 @@ exports.actualizarUsuario = async (req, res) => {
   }
 };
 
+// 🔍 Obtener usuario por ID
+exports.obtenerUsuarioPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    console.log(`🔍 Buscando usuario con ID: ${id}`);
+
+    // Validar formato del ID
+    if (!id || id.length !== 24) {
+      return res.status(400).json({ mensaje: 'ID de usuario no válido' });
+    }
+
+    const usuario = await Usuario.findById(id).select('-contraseña');
+
+    if (!usuario) {
+      console.log('❌ Usuario no encontrado:', id);
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    console.log('✅ Usuario encontrado:', usuario.nombre);
+    res.json(usuario);
+    
+  } catch (error) {
+    console.error('Error en obtenerUsuarioPorId:', error);
+    
+    if (error.name === 'CastError') {
+      return res.status(400).json({ mensaje: 'ID de usuario no válido' });
+    }
+    
+    res.status(500).json({ mensaje: 'Error al obtener usuario', error: error.message });
+  }
+};
+
 // === Eliminar usuario ===
 exports.eliminarUsuario = async (req, res) => {
   try {

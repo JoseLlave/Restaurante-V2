@@ -7,6 +7,8 @@ const cors = require('cors');
 const path = require('path');
 const connectDB = require('./config/db');
 
+const auditoriaMiddleware = require('./middleware/auditoriaMiddleware');
+
 // Inicializar aplicación
 const app = express();
 
@@ -21,6 +23,7 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(auditoriaMiddleware);
 
 // ======================
 // 🔐 Configuración CORS
@@ -51,6 +54,10 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 const mesaRoutes = require('./routes/mesaRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
 const clienteRoutes = require('./routes/clienteRoutes');
+const productoRoutes = require('./routes/productoRoutes');
+const auditoriaRoutes = require('./routes/auditoriaRoutes');
+const reporteRoutes = require('./routes/reporteRoutes');
+const pedidoRoutes = require('./routes/pedidoRoutes'); 
 
 // ======================
 // 🔗 Usar rutas API
@@ -59,6 +66,10 @@ app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/mesas', mesaRoutes);
 app.use('/api/reservas', reservaRoutes);
 app.use('/api/clientes', clienteRoutes); // ✅ Solo una vez
+app.use('/api/productos', productoRoutes);
+app.use('/api/auditoria', auditoriaRoutes);
+app.use('/api/reportes', reporteRoutes);
+app.use('/api/pedidos', pedidoRoutes);
 
 // ======================
 // 🌐 Rutas del frontend

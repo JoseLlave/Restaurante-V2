@@ -282,7 +282,6 @@ async function actualizarDatosEnTiempoRealMozo() {
     }
 }
 
-// 🔥 NUEVA FUNCIÓN: Cargar reservas específicamente para mozo
 async function cargarReservasParaMozo() {
     try {
         const res = await fetch('/api/reservas', { credentials: 'include' });
@@ -309,7 +308,7 @@ async function actualizarVistaMesas() {
         });
         
         if (!res.ok) {
-            console.error(`❌ Error ${res.status} al actualizar mesas`);
+            console.error(` Error ${res.status} al actualizar mesas`);
             return;
         }
         
@@ -322,7 +321,7 @@ async function actualizarVistaMesas() {
                 window.actualizarVistaMesasMozo(mesas);
             }
         } else {
-            console.error('❌ Datos de mesas no son un array:', mesas);
+            console.error('Datos de mesas no son un array:', mesas);
         }
         
     } catch (error) {
@@ -343,36 +342,31 @@ async function actualizarVistaPedidos() {
   }
 }
 
-// ================================
-// 👑 CONFIGURACIÓN ADMINISTRADOR
-// ================================
+// CONFIGURACIÓN ADMINISTRADOR
+
 async function configurarDashboardAdmin() {
-  console.log("👑 Configurando dashboard para Administrador");
+  console.log("Configurando dashboard para Administrador");
   ocultarModulosNoPermitidos('Administrador');
   await cargarModulo('usuarios');
 }
 
-// ================================
-// 👨‍🍳 CONFIGURACIÓN COCINERO
-// ================================
+// CONFIGURACIÓN COCINERO
+
 async function configurarDashboardCocinero() {
-  console.log("👨‍🍳 Configurando dashboard para Cocinero");
+  console.log("Configurando dashboard para Cocinero");
   ocultarModulosNoPermitidos('Cocinero');
   await cargarModulo('cocina');
 }
 
-// ================================
-// 💰 CONFIGURACIÓN CAJERO
-// ================================
+// CONFIGURACIÓN CAJERO
 async function configurarDashboardCajero() {
-  console.log("💰 Configurando dashboard para Cajero");
+  console.log("Configurando dashboard para Cajero");
   ocultarModulosNoPermitidos('Cajero');
   await cargarModulo('caja');
 }
 
-// ================================
-// 🔒 OCULTAR MÓDULOS NO PERMITIDOS
-// ================================
+// OCULTAR MÓDULOS NO PERMITIDOS
+
 function ocultarModulosNoPermitidos(rol) {
     const navLinks = document.querySelectorAll('.nav-link');
     const permisos = {
@@ -418,7 +412,6 @@ function ocultarModulosNoPermitidos(rol) {
     });
 }
 
-// ================================
-// 🚀 INICIALIZACIÓN
-// ================================
+// INICIALIZACIÓN
+
 document.addEventListener('DOMContentLoaded', configurarDashboardPorRol);

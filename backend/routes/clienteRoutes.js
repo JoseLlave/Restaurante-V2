@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 📋 Listar clientes
+// Listar clientes
 router.get('/', async (req, res) => {
   try {
     const clientes = await Cliente.find();
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 🔍 Buscar cliente por DNI
+// Buscar cliente por DNI
 router.get('/:dni', async (req, res) => {
   try {
     const cliente = await Cliente.findOne({ dni: req.params.dni });
@@ -34,7 +34,7 @@ router.get('/:dni', async (req, res) => {
   }
 });
 
-// 🔍✨ Buscar o crear cliente automáticamente
+// Buscar o crear cliente automáticamente
 router.post('/buscar-o-crear', async (req, res) => {
   try {
     const { dni, nombres, apellidos, correo, telefono } = req.body;
@@ -48,14 +48,14 @@ router.post('/buscar-o-crear', async (req, res) => {
     if (!cliente) {
       cliente = new Cliente({ dni, nombres, apellidos, correo, telefono });
       await cliente.save();
-      console.log('🆕 Cliente creado automáticamente');
+      console.log('Cliente creado automáticamente');
     } else {
-      console.log('✅ Cliente existente encontrado');
+      console.log('Cliente existente encontrado');
     }
 
     res.json(cliente);
   } catch (error) {
-    console.error('❌ Error en buscar-o-crear:', error);
+    console.error('Error en buscar-o-crear:', error);
     res.status(500).json({ message: error.message });
   }
 });

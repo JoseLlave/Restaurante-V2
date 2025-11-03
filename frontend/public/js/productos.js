@@ -33,7 +33,7 @@ function initModuloProductos() {
         }
     })();
 
-    // 📋 Cargar productos
+    // Cargar productos
     async function cargarProductos() {
         try {
             const res = await fetch(apiURL, { 
@@ -90,7 +90,7 @@ function initModuloProductos() {
         }
     }
 
-    // ➕ Crear o actualizar producto
+    //  Crear o actualizar producto
     formProducto.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (msgCrear) msgCrear.textContent = '';
@@ -108,7 +108,7 @@ function initModuloProductos() {
         // Validaciones frontend
         if (!productoData.nombre || !productoData.precio || !productoData.categoria) {
             if (msgCrear) {
-                msgCrear.textContent = '❌ Nombre, precio y categoría son obligatorios';
+                msgCrear.textContent = ' Nombre, precio y categoría son obligatorios';
                 msgCrear.className = 'msg text-danger';
             }
             return;
@@ -140,7 +140,7 @@ function initModuloProductos() {
             const contentType = res.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
                 const textResponse = await res.text();
-                console.error('❌ Respuesta no JSON:', textResponse);
+                console.error('Respuesta no JSON:', textResponse);
                 throw new Error('El servidor respondió con un formato incorrecto');
             }
 
@@ -152,7 +152,7 @@ function initModuloProductos() {
 
             // Éxito
             if (msgCrear) {
-                msgCrear.textContent = editandoProductoId ? '✅ Producto actualizado' : '✅ Producto creado';
+                msgCrear.textContent = editandoProductoId ? ' Producto actualizado' : ' Producto creado';
                 msgCrear.className = 'msg text-success';
             }
 
@@ -164,7 +164,7 @@ function initModuloProductos() {
         } catch (err) {
             console.error('Error al guardar producto:', err);
             if (msgCrear) {
-                msgCrear.textContent = '❌ ' + err.message;
+                msgCrear.textContent = err.message;
                 msgCrear.className = 'msg text-danger';
             }
         }
@@ -173,7 +173,7 @@ function initModuloProductos() {
     // ✏️ Editar producto - VERSIÓN CORREGIDA
     window.editarProducto = async (id) => {
         try {
-            console.log(`📝 Editando producto: ${id}`);
+            console.log(`Editando producto: ${id}`);
             
             const res = await fetch(`${apiURL}/${id}`, { 
                 credentials: 'include',
@@ -193,7 +193,7 @@ function initModuloProductos() {
             const contentType = res.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
                 const textResponse = await res.text();
-                console.error('❌ Respuesta no JSON:', textResponse);
+                console.error('Respuesta no JSON:', textResponse);
                 throw new Error('El servidor respondió con un formato incorrecto');
             }
 
@@ -204,7 +204,7 @@ function initModuloProductos() {
                 throw new Error('Datos del producto incompletos');
             }
 
-            console.log('✅ Producto cargado para edición:', producto.nombre);
+            console.log('Producto cargado para edición:', producto.nombre);
 
             // Llenar formulario con datos del producto
             document.getElementById('productoIdEditar').value = producto._id;
@@ -233,7 +233,7 @@ function initModuloProductos() {
         }
     };
 
-    // 🗑️ Eliminar producto
+    // Eliminar producto
     window.eliminarProducto = async (id) => {
         if (!confirm('¿Estás seguro de eliminar este producto?')) return;
 
@@ -250,7 +250,7 @@ function initModuloProductos() {
             const contentType = res.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
                 const textResponse = await res.text();
-                console.error('❌ Respuesta no JSON:', textResponse);
+                console.error('Respuesta no JSON:', textResponse);
                 throw new Error('El servidor respondió con un formato incorrecto');
             }
 
@@ -260,16 +260,16 @@ function initModuloProductos() {
                 throw new Error(data.mensaje || 'Error al eliminar producto');
             }
 
-            alert('✅ Producto eliminado correctamente');
+            alert('Producto eliminado correctamente');
             await cargarProductos();
 
         } catch (err) {
             console.error('Error al eliminar producto:', err);
-            alert('❌ Error: ' + err.message);
+            alert('Error: ' + err.message);
         }
     };
 
-    // 🔄 Resetear formulario
+    //Resetear formulario
     function resetearFormulario() {
         formProducto.reset();
         document.getElementById('productoIdEditar').value = '';

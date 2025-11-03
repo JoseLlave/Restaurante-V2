@@ -1,6 +1,6 @@
 const Producto = require('../models/productoModel');
 
-// 📋 Obtener todos los productos
+// Obtener todos los productos
 exports.getProductos = async (req, res) => {
   try {
     const productos = await Producto.find().sort({ createdAt: -1 });
@@ -11,12 +11,12 @@ exports.getProductos = async (req, res) => {
   }
 };
 
-// 🔍 Obtener producto por ID - NUEVA FUNCIÓN
+// Obtener producto por ID - NUEVA FUNCIÓN
 exports.getProductoById = async (req, res) => {
   try {
     const { id } = req.params;
     
-    console.log(`🔍 Buscando producto con ID: ${id}`);
+    console.log(`Buscando producto con ID: ${id}`);
 
     // Validar formato del ID
     if (!id || id.length !== 24) {
@@ -30,7 +30,7 @@ exports.getProductoById = async (req, res) => {
       return res.status(404).json({ mensaje: 'Producto no encontrado' });
     }
 
-    console.log('✅ Producto encontrado:', producto.nombre);
+    console.log('Producto encontrado:', producto.nombre);
     res.json(producto);
     
   } catch (error) {
@@ -44,7 +44,7 @@ exports.getProductoById = async (req, res) => {
   }
 };
 
-// ➕ Crear nuevo producto
+// Crear nuevo producto
 exports.crearProducto = async (req, res) => {
   try {
     const { nombre, descripcion, precio, tiempoAprox, stock, categoria, estado } = req.body;
@@ -66,7 +66,7 @@ exports.crearProducto = async (req, res) => {
 
     await nuevoProducto.save();
     
-    console.log('✅ Producto creado:', nuevoProducto._id);
+    console.log('Producto creado:', nuevoProducto._id);
     res.status(201).json(nuevoProducto);
     
   } catch (error) {
@@ -90,12 +90,12 @@ exports.actualizarProducto = async (req, res) => {
     const { id } = req.params;
     const { nombre, descripcion, precio, tiempoAprox, stock, categoria, estado } = req.body;
 
-    console.log(`🔄 Actualizando producto ${id} con datos:`, req.body);
+    console.log(`Actualizando producto ${id} con datos:`, req.body);
 
     // Validar que el producto existe
     const productoExistente = await Producto.findById(id);
     if (!productoExistente) {
-      console.log('❌ Producto no encontrado:', id);
+      console.log('Producto no encontrado:', id);
       return res.status(404).json({ mensaje: 'Producto no encontrado' });
     }
 
@@ -124,7 +124,7 @@ exports.actualizarProducto = async (req, res) => {
       return res.status(404).json({ mensaje: 'Producto no encontrado después de actualizar' });
     }
 
-    console.log('✅ Producto actualizado:', producto._id);
+    console.log('Producto actualizado:', producto._id);
     res.json(producto);
     
   } catch (error) {
@@ -146,12 +146,12 @@ exports.actualizarProducto = async (req, res) => {
   }
 };
 
-// 🗑️ Eliminar producto
+// Eliminar producto
 exports.eliminarProducto = async (req, res) => {
   try {
     const { id } = req.params;
 
-    console.log(`🗑️ Eliminando producto: ${id}`);
+    console.log(`Eliminando producto: ${id}`);
 
     const producto = await Producto.findByIdAndDelete(id);
     
@@ -159,7 +159,7 @@ exports.eliminarProducto = async (req, res) => {
       return res.status(404).json({ mensaje: 'Producto no encontrado' });
     }
 
-    console.log('✅ Producto eliminado:', id);
+    console.log('Producto eliminado:', id);
     res.json({ mensaje: 'Producto eliminado correctamente' });
 
   } catch (error) {
@@ -173,7 +173,7 @@ exports.eliminarProducto = async (req, res) => {
   }
 };
 
-// 🔍 Obtener productos activos (para carta)
+// Obtener productos activos (para carta)
 exports.getProductosActivos = async (req, res) => {
   try {
     const productos = await Producto.find({ 

@@ -16,12 +16,12 @@ function initModuloMesas() {
 
     // Hacer función global para actualizaciones desde dashboard.js
     window.actualizarVistaMesasMozo = function(nuevasMesas) {
-        console.log("🔄 Actualizando vista de mesas para Mozo");
+        console.log("Actualizando vista de mesas para Mozo");
         if (Array.isArray(nuevasMesas)) {
             mesas = nuevasMesas;
             renderizarMesas();
         } else {
-            console.error("❌ Datos de mesas no son un array:", nuevasMesas);
+            console.error("Datos de mesas no son un array:", nuevasMesas);
         }
     };
 
@@ -67,7 +67,7 @@ function initModuloMesas() {
         
         // Verificar que mesas sea un array
         if (!Array.isArray(mesas)) {
-            console.error("❌ mesas no es un array:", mesas);
+            console.error("mesas no es un array:", mesas);
             mostrarError("Error: Datos de mesas inválidos");
             return;
         }
@@ -163,7 +163,7 @@ function initModuloMesas() {
     // Actualizaciones automáticas cada 30 segundos
     function iniciarActualizacionesAutomaticas() {
         intervaloActualizacion = setInterval(() => {
-            console.log("🔄 Actualización automática de mesas (Mozo)");
+            console.log("Actualización automática de mesas (Mozo)");
             cargarMesas();
         }, 30000);
     }

@@ -32,7 +32,7 @@ async function registrarAuditoria(req, res, respuesta) {
     else if (ruta.includes('/api/productos')) modulo = 'Productos';
     else if (ruta.includes('/api/pedidos')) modulo = 'Pedidos';
     else if (ruta.includes('/api/auditoria')) modulo = 'Auditoría';
-    else if (ruta.includes('/api/reportes')) modulo = 'Reportes'; // ✅ NUEVO
+    else if (ruta.includes('/api/reportes')) modulo = 'Reportes';
 
     // Determinar la acción basada en el método HTTP y la ruta específica
     let accion = 'Consulta';
@@ -94,7 +94,7 @@ async function registrarAuditoria(req, res, respuesta) {
       ip: req.ip || req.connection.remoteAddress || 'Desconocida'
     });
 
-    console.log(`📝 Auditoría registrada: ${req.usuarioId} - ${accion} en ${modulo}`);
+    console.log(`Auditoría registrada: ${req.usuarioId} - ${accion} en ${modulo}`);
 
   } catch (error) {
     console.error('Error en auditoría middleware:', error);

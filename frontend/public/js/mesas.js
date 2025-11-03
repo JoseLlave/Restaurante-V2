@@ -136,7 +136,7 @@ function initModuloMesas() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(mesaData)
         });
-        mostrarMensaje("✅ Mesa actualizada correctamente", "success");
+        mostrarMensaje("Mesa actualizada correctamente", "success");
       } else {
         // Crear nueva mesa
         response = await fetch(apiURL, {
@@ -144,7 +144,7 @@ function initModuloMesas() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(mesaData)
         });
-        mostrarMensaje("✅ Mesa creada correctamente", "success");
+        mostrarMensaje("Mesa creada correctamente", "success");
       }
 
       const mesaGuardada = await response.json();
@@ -163,7 +163,7 @@ function initModuloMesas() {
 
     } catch (err) {
       console.error("Error al guardar mesa:", err);
-      mostrarMensaje("❌ Error al guardar la mesa", "error");
+      mostrarMensaje("Error al guardar la mesa", "error");
     }
   }
 
@@ -181,7 +181,7 @@ function initModuloMesas() {
 
     // Cambiar texto del botón
     btnCrearActualizar.textContent = "Actualizar";
-    document.getElementById('tituloFormMesa').textContent = "✏️ Editar Mesa";
+    document.getElementById('tituloFormMesa').textContent = "Editar Mesa";
 
     editandoMesaId = id;
     
@@ -193,7 +193,7 @@ function initModuloMesas() {
     formMesa.reset();
     mesaIdEditar.value = '';
     btnCrearActualizar.textContent = "Crear";
-    document.getElementById('tituloFormMesa').textContent = "➕ Crear Mesa";
+    document.getElementById('tituloFormMesa').textContent = "Crear Mesa";
     editandoMesaId = null;
     msgCrearMesa.textContent = '';
   }
@@ -215,10 +215,10 @@ function initModuloMesas() {
       mesas = mesas.filter(m => m._id !== id);
       renderizarMesas();
       renderizarTablaMesas();
-      mostrarMensaje("✅ Mesa eliminada correctamente", "success");
+      mostrarMensaje("Mesa eliminada correctamente", "success");
     } catch (err) {
       console.error("Error al eliminar mesa:", err);
-      mostrarMensaje("❌ Error al eliminar la mesa", "error");
+      mostrarMensaje("Error al eliminar la mesa", "error");
     }
   }
 
@@ -243,7 +243,7 @@ function initModuloMesas() {
 
   // === Crear nueva mesa (modo mapa) ===
   btnCrearMesaMapa.addEventListener('click', () => {
-    if (creandoMesa) return alert("⚠️ Ya estás creando una mesa.");
+    if (creandoMesa) return alert("Ya estás creando una mesa.");
     creandoMesa = true;
     crearNuevaMesaEnMapa();
   });
@@ -300,7 +300,7 @@ function initModuloMesas() {
       renderizarTablaMesas();
     } catch (err) {
       console.error("Error al actualizar mesa:", err);
-      alert("❌ Error al guardar los cambios");
+      alert("Error al guardar los cambios");
     }
   }
 

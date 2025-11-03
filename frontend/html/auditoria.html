@@ -3,7 +3,7 @@
 
   <!-- FILTROS -->
   <div class="card mb-4 bg-dark text-light p-3 rounded-4 sombra-suave">
-    <h5 class="mb-3">🔍 Filtros de Búsqueda</h5>
+    <h5 class="mb-3">Filtros de Búsqueda</h5>
     <form id="formFiltrosAuditoria" class="row g-3">
       <div class="col-md-3">
         <label for="fechaDesde" class="form-label">Fecha Desde</label>
@@ -31,7 +31,7 @@
         </select>
       </div>
       <div class="col-md-2">
-        <button type="submit" class="btn btn-primary mt-4">🔍 Aplicar Filtros</button>
+        <button type="submit" class="btn btn-primary mt-4">Aplicar Filtros</button>
       </div>
     </form>
 
@@ -39,13 +39,13 @@
     <div class="row mt-3">
       <div class="col-md-12">
         <hr>
-        <h6 class="text-warning">⚠️ Herramientas de Mantenimiento</h6>
+        <h6 class="text-warning">Herramientas de Mantenimiento</h6>
         <div class="d-flex gap-2 flex-wrap">
           <button type="button" id="btnEliminarAntiguos" class="btn btn-outline-warning btn-sm">
-            🗑️ Eliminar registros antiguos
+            Eliminar registros antiguos
           </button>
           <button type="button" id="btnEliminarTodo" class="btn btn-outline-danger btn-sm">
-            💥 Eliminar TODOS los registros
+            Eliminar TODOS los registros
           </button>
         </div>
         <small class="text-muted">Estas acciones no se pueden deshacer</small>
@@ -55,7 +55,7 @@
 
   <!-- TABLA DE AUDITORÍA -->
   <div class="card bg-dark text-light p-3 rounded-4 sombra-suave">
-    <h5 class="mb-3">📋 Registros de Auditoría</h5>
+    <h5 class="mb-3">Registros de Auditoría</h5>
     <div class="table-responsive mt-3">
       <table class="table table-dark table-hover align-middle tabla-auditoria">
         <thead>
@@ -84,7 +84,7 @@
   <div class="modal-dialog">
     <div class="modal-content bg-dark text-light">
       <div class="modal-header">
-        <h5 class="modal-title">🗑️ Eliminar Registros Antiguos</h5>
+        <h5 class="modal-title">Eliminar Registros Antiguos</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
@@ -94,7 +94,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" id="btnConfirmarEliminarAntiguos" class="btn btn-warning">🗑️ Eliminar Antiguos</button>
+        <button type="button" id="btnConfirmarEliminarAntiguos" class="btn btn-warning">Eliminar Antiguos</button>
       </div>
     </div>
   </div>
@@ -105,12 +105,12 @@
   <div class="modal-dialog">
     <div class="modal-content bg-dark text-light">
       <div class="modal-header">
-        <h5 class="modal-title text-danger">💥 Eliminar TODOS los Registros</h5>
+        <h5 class="modal-title text-danger">Eliminar TODOS los Registros</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <div class="alert alert-danger">
-          <h6>⚠️ ¡ADVERTENCIA CRÍTICA!</h6>
+          <h6>¡ADVERTENCIA CRÍTICA!</h6>
           <p>Estás a punto de eliminar <strong>TODOS</strong> los registros de auditoría.</p>
           <p>Esta acción <strong>NO SE PUEDE DESHACER</strong> y perderás todo el historial.</p>
         </div>
@@ -119,7 +119,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" id="btnConfirmarEliminarTodo" class="btn btn-danger" disabled>💥 ELIMINAR TODO</button>
+        <button type="button" id="btnConfirmarEliminarTodo" class="btn btn-danger" disabled>ELIMINAR TODO</button>
       </div>
     </div>
   </div>

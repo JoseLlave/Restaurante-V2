@@ -159,7 +159,7 @@ exports.actualizarUsuario = async (req, res) => {
   }
 };
 
-// 🔍 Obtener usuario por ID
+// Obtener usuario por ID
 exports.obtenerUsuarioPorId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -174,11 +174,11 @@ exports.obtenerUsuarioPorId = async (req, res) => {
     const usuario = await Usuario.findById(id).select('-contraseña');
 
     if (!usuario) {
-      console.log('❌ Usuario no encontrado:', id);
+      console.log('Usuario no encontrado:', id);
       return res.status(404).json({ mensaje: 'Usuario no encontrado' });
     }
 
-    console.log('✅ Usuario encontrado:', usuario.nombre);
+    console.log('Usuario encontrado:', usuario.nombre);
     res.json(usuario);
     
   } catch (error) {

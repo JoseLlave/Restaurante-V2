@@ -1,7 +1,7 @@
 <section class="container mt-4">
   <h2 class="text-center mb-4">📅 Gestión de Reservas</h2>
 
-  <!-- 🔸 Controles superiores -->
+  <!--  Controles superiores -->
   <div class="mb-3 d-flex align-items-center flex-wrap justify-content-between">
     <div class="d-flex align-items-center flex-wrap">
       <label for="selectPiso" class="form-label mb-0">Seleccionar piso:</label>
@@ -13,7 +13,7 @@
       <label for="horaSimulada" class="form-label ms-3 mb-0">Hora simulación:</label>
       <input type="time" id="horaSimulada" class="form-control campo-oscuro w-auto d-inline-block ms-2" value="12:00">
 
-      <button id="btnActualizarMapa" class="btn btn-outline-info btn-sm ms-3">🔄 Actualizar vista</button>
+      <button id="btnActualizarMapa" class="btn btn-outline-info btn-sm ms-3"> Actualizar vista</button>
     </div>
 
     <div class="d-flex align-items-center flex-wrap">
@@ -26,7 +26,7 @@
   </div>
 
   <div class="row g-3">
-    <!-- 🗺️ Mapa interactivo -->
+    <!--  Mapa interactivo -->
     <div id="vistaMapa" class="col-md-7">
       <div id="mapaReservasContainer" class="position-relative sombra-suave bg-dark" style="height: 500px;">
         <!-- Imagen del plano -->
@@ -38,15 +38,15 @@
         <!-- Contenedor de mesas -->
         <div id="mesasMapaReservas"></div>
 
-        <!-- 🕓 Reloj -->
+        <!-- Reloj -->
         <div id="relojReserva"
              class="position-absolute top-0 end-0 text-light px-3 py-2 sombra-suave">
-          🕒 <span id="horaActual">--:--:--</span>
+          <span id="horaActual">--:--:--</span>
         </div>
       </div>
     </div>
 
-    <!-- 📋 Formulario lateral -->
+    <!-- Formulario lateral -->
     <div class="col-md-5">
       <form id="formReserva" class="card bg-dark text-light p-3 rounded-4 sombra-suave">
         <h5 class="mb-3 text-center">➕ Nueva Reserva</h5>
@@ -104,7 +104,7 @@
         </div>
 
         <button class="btn btn-crear w-100" type="submit">
-          ✅ Guardar Reserva
+          Guardar Reserva
         </button>
 
         <div class="mt-2 text-center">
@@ -114,9 +114,9 @@
     </div>
   </div>
 
-  <!-- 📋 Vista de tabla -->
+  <!-- Vista de tabla -->
   <div id="vistaTabla" class="card bg-dark text-light p-3 rounded-4 sombra-suave mt-4" style="display:none;">
-    <h5 class="mb-3">📋 Reservas Registradas</h5>
+    <h5 class="mb-3">Reservas Registradas</h5>
     <div class="table-responsive">
       <table class="table table-dark table-hover align-middle text-center">
         <thead>
@@ -137,6 +137,6 @@
   </div>
 </section>
 
-<!-- 🧩 Enlaces a CSS y JS -->
+<!--  Enlaces a CSS y JS -->
 <link rel="stylesheet" href="../public/css/reservas.css">
 <script type="module" src="../public/js/reservas.js"></script>

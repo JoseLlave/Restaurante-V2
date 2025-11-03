@@ -2,7 +2,7 @@ const Pedido = require('../models/pedidoModel');
 const Producto = require('../models/productoModel');
 const Mesa = require('../models/mesaModel');
 
-// 📋 Obtener todos los pedidos
+// Obtener todos los pedidos
 exports.getPedidos = async (req, res) => {
   try {
     const { estado } = req.query;
@@ -26,7 +26,7 @@ exports.getPedidos = async (req, res) => {
   }
 };
 
-// ➕ Crear nuevo pedido
+// Crear nuevo pedido
 exports.crearPedido = async (req, res) => {
   try {
     const { mesaId, items, observacionesGenerales } = req.body;
@@ -124,7 +124,7 @@ exports.actualizarEstado = async (req, res) => {
     const { estado } = req.body;
     const usuarioRol = req.usuarioRol;
 
-    console.log(`🔄 Usuario ${usuarioRol} intenta cambiar pedido ${id} a estado: ${estado}`);
+    console.log(`Usuario ${usuarioRol} intenta cambiar pedido ${id} a estado: ${estado}`);
 
     const estadosValidos = ['creado', 'en_cocina', 'listo', 'entregado', 'pagado', 'cancelado'];
     
@@ -181,7 +181,7 @@ exports.actualizarEstado = async (req, res) => {
       return res.status(404).json({ mensaje: 'Pedido no encontrado' });
     }
 
-    console.log(`✅ Pedido ${id} actualizado a estado: ${estado}`);
+    console.log(`Pedido ${id} actualizado a estado: ${estado}`);
 
     res.json(pedido);
 
@@ -213,7 +213,7 @@ exports.getPedidoById = async (req, res) => {
   }
 };
 
-// 🗑️ Eliminar pedido (solo para pedidos cancelados)
+// Eliminar pedido (solo para pedidos cancelados)
 exports.eliminarPedido = async (req, res) => {
   try {
     const { id } = req.params;
@@ -237,7 +237,7 @@ exports.eliminarPedido = async (req, res) => {
   }
 };
 
-// 📊 Obtener pedidos por mesa
+// Obtener pedidos por mesa
 exports.getPedidosPorMesa = async (req, res) => {
   try {
     const { mesaId } = req.params;

@@ -18,7 +18,6 @@ const usuarioSchema = new mongoose.Schema({
   fechaAlta: { type: Date, default: Date.now }
 });
 
-// 🔒 Encriptar contraseña solo si fue modificada o es nueva
 usuarioSchema.pre('save', async function (next) {
   if (!this.isModified('contraseña')) return next();
 
@@ -31,7 +30,6 @@ usuarioSchema.pre('save', async function (next) {
   next();
 });
 
-// 🧠 Método para comparar contraseñas
 usuarioSchema.methods.compararContraseña = async function (pass) {
   return await bcrypt.compare(pass, this.contraseña);
 };

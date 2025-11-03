@@ -54,23 +54,18 @@ const pedidoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  // 🔥 CORREGIDO: Si necesitas un código único, genera uno automáticamente
   codigo: {
     type: String,
     unique: true,
-    sparse: true // 🔥 IMPORTANTE: Permite valores null sin error de duplicado
+    sparse: true 
   }
 }, {
   timestamps: true
 });
 
-// 🔥 OPCIÓN 2: Eliminar el índice único si no necesitas código
-// Ejecuta en MongoDB: db.pedidos.dropIndex("codigo_1")
-
-// 🔥 OPCIÓN 3: Generar código automáticamente antes de guardar
 pedidoSchema.pre('save', function(next) {
   if (!this.codigo) {
-    // Generar código único: P + timestamp + random
+    
     this.codigo = 'P' + Date.now() + Math.floor(Math.random() * 1000);
   }
   next();

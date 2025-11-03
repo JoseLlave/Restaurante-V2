@@ -5,7 +5,7 @@
   const Reserva = require('../models/reservaModel');
   const ExcelJS = require('exceljs');
 
-  // 📊 Reporte de ventas por fecha
+  // Reporte de ventas por fecha
   exports.reporteVentas = async (req, res) => {
     try {
       const { fechaDesde, fechaHasta, tipo } = req.query;
@@ -90,7 +90,7 @@
     }
   };
 
-  // 📈 Reporte de pedidos por mozo
+  // Reporte de pedidos por mozo
   exports.reporteMozos = async (req, res) => {
     try {
       const { fechaDesde, fechaHasta } = req.query;
@@ -160,7 +160,7 @@
     }
   };
 
-  // 🪑 Reporte de ocupación de mesas
+  // Reporte de ocupación de mesas
   exports.reporteMesas = async (req, res) => {
     try {
       const { fechaDesde, fechaHasta } = req.query;
@@ -250,7 +250,7 @@
     }
   };
 
-  // 📤 Exportar a Excel
+  // Exportar a Excel
   exports.exportarExcel = async (req, res) => {
     try {
       const { fechaDesde, fechaHasta, tipoReporte } = req.query;

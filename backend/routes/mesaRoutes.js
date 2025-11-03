@@ -11,10 +11,7 @@ const {
 const proteger = require('../middleware/authMiddleware');
 const verificarRol = require('../middleware/rolMiddleware');
 
-// 🔥 CAMBIAR: Permitir a MOZOS ver mesas (solo lectura)
-router.get('/', proteger, verificarRol(['Administrador', 'Mozo']), getMesas); // ✅ Mozo puede VER
-
-// 🔥 MANTENER: Solo admin puede modificar
+router.get('/', proteger, verificarRol(['Administrador', 'Mozo']), getMesas);
 router.post('/', proteger, verificarRol(['Administrador']), crearMesa);
 router.put('/:id', proteger, verificarRol(['Administrador']), actualizarMesa);
 router.put('/:id/estado', proteger, verificarRol(['Administrador']), actualizarEstadoMesa);

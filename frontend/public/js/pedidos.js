@@ -30,7 +30,7 @@ function initModuloPedidos() {
       
       console.log(`👤 Usuario rol: ${usuarioRol}`);
 
-      // 🔥 SOLO MOZOS pueden crear pedidos
+      // SOLO MOZOS pueden crear pedidos
       if (btnConfirmarPedido && usuarioRol !== 'Mozo') {
         btnConfirmarPedido.style.display = 'none';
         // Ocultar también la sección de crear pedido
@@ -51,7 +51,7 @@ function initModuloPedidos() {
     }
   })();
 
-  // 📋 Cargar pedidos
+  // Cargar pedidos
   async function cargarPedidos() {
     try {
       let url = apiURL;
@@ -117,24 +117,24 @@ function initModuloPedidos() {
     }
   }
 
-  // 🆕 Cargar mesas para nuevo pedido - 🔥 CORREGIDO
+  // Cargar mesas para nuevo pedido
   async function cargarMesasParaPedido() {
     try {
-      console.log("🔄 Cargando mesas...");
+      console.log("Cargando mesas...");
       const res = await fetch(apiMesas, { credentials: 'include' });
       
       if (!res.ok) {
-        console.error(`❌ Error ${res.status} al cargar mesas`);
+        console.error(`Error ${res.status} al cargar mesas`);
         return;
       }
 
       const mesas = await res.json();
-      console.log(`✅ ${mesas ? mesas.length : 0} mesas cargadas:`, mesas);
+      console.log(` ${mesas ? mesas.length : 0} mesas cargadas:`, mesas);
 
       if (Array.isArray(mesas) && selectMesa) {
         selectMesa.innerHTML = '<option value="">Seleccionar mesa</option>';
         
-        // 🔥 CORREGIDO: Mesas RESERVADAS son las disponibles para pedidos
+        //CORREGIDO: Mesas RESERVADAS son las disponibles para pedidos
         const mesasDisponibles = mesas.filter(mesa => 
           mesa.estado === 'Reservada' || mesa.estado === 'Ocupada'
         );
@@ -168,22 +168,22 @@ function initModuloPedidos() {
           selectMesa.appendChild(option);
         });
       } else {
-        console.error('❌ Mesas no es un array o selectMesa no existe');
+        console.error('Mesas no es un array o selectMesa no existe');
       }
     } catch (err) {
       console.error('Error cargando mesas:', err);
     }
   }
 
-  // 🍽️ Cargar productos para nuevo pedido
+  //Cargar productos para nuevo pedido
   async function cargarProductosParaPedido() {
     try {
-      console.log("🔄 Cargando productos activos...");
+      console.log("Cargando productos activos...");
       
       let res = await fetch(apiProductos);
       
       if (!res.ok) {
-        console.log("⚠️ Intentando con credentials...");
+        console.log(" Intentando con credentials...");
         res = await fetch(apiProductos, { credentials: 'include' });
       }
 
@@ -203,7 +203,7 @@ function initModuloPedidos() {
           option.dataset.stock = producto.stock || 0;
           selectProducto.appendChild(option);
         });
-        console.log(`✅ ${productos.length} productos cargados`);
+        console.log(`${productos.length} productos cargados`);
       }
     } catch (err) {
       console.error('Error cargando productos:', err);
@@ -212,7 +212,7 @@ function initModuloPedidos() {
     }
   }
 
-  // 🔥 NUEVA FUNCIÓN: Fallback para cargar productos desde pedidos existentes
+  //NUEVA FUNCIÓN: Fallback para cargar productos desde pedidos existentes
   async function cargarProductosDesdePedidos() {
     try {
       const res = await fetch(apiURL, { credentials: 'include' });
@@ -248,7 +248,7 @@ function initModuloPedidos() {
             option.dataset.stock = producto.stock;
             selectProducto.appendChild(option);
           });
-          console.log(`🔄 ${productosUnicos.length} productos cargados desde pedidos existentes`);
+          console.log(`${productosUnicos.length} productos cargados desde pedidos existentes`);
         }
       }
     } catch (error) {
@@ -256,7 +256,7 @@ function initModuloPedidos() {
     }
   }
 
-  // ➕ Agregar producto al pedido
+  // Agregar producto al pedido
   if (btnAgregarProducto) {
     btnAgregarProducto.addEventListener('click', () => {
       if (!selectProducto || !selectProducto.value) {
@@ -307,13 +307,13 @@ function initModuloPedidos() {
     });
   }
 
-  // 🗑️ Eliminar item del pedido
+  //Eliminar item del pedido
   window.eliminarItem = (index) => {
     itemsPedido.splice(index, 1);
     actualizarTablaItems();
   };
 
-  // 📊 Actualizar tabla de items
+  // Actualizar tabla de items
   function actualizarTablaItems() {
     if (!tablaItemsBody) return;
     
@@ -351,12 +351,12 @@ function initModuloPedidos() {
     if (observacionesInput) observacionesInput.value = '';
   }
 
-  // ✅ Confirmar pedido - 🔥 SOLO MOZOS
+  // Confirmar pedido -SOLO MOZOS
   if (btnConfirmarPedido) {
     btnConfirmarPedido.addEventListener('click', async () => {
-      // 🔥 VERIFICAR QUE SEA MOZO
+      //VERIFICAR QUE SEA MOZO
       if (usuarioRol !== 'Mozo') {
-        alert('❌ Solo los mozos pueden crear pedidos');
+        alert('Solo los mozos pueden crear pedidos');
         return;
       }
 
@@ -397,19 +397,19 @@ function initModuloPedidos() {
           throw new Error(data.mensaje || 'Error al crear pedido');
         }
 
-        alert('✅ Pedido creado correctamente');
+        alert('Pedido creado correctamente');
         resetearPedido();
         await cargarPedidos();
         await cargarMesasParaPedido();
 
       } catch (err) {
         console.error('Error creando pedido:', err);
-        alert('❌ Error al crear pedido: ' + err.message);
+        alert('Error al crear pedido: ' + err.message);
       }
     });
   }
 
-  // 🔄 Resetear pedido
+  // Resetear pedido
   function resetearPedido() {
     itemsPedido = [];
     const formNuevoPedido = document.getElementById('formNuevoPedido');
@@ -419,13 +419,13 @@ function initModuloPedidos() {
     actualizarTablaItems();
   }
 
-  // 🎯 Generar botones de acción según rol y estado - 🔥 FLUJO CORREGIDO
+  // Generar botones de acción según rol y estado
   function generarBotonesAccion(pedido) {
       if (!pedido || !pedido.estado) return '';
       
       const botones = [];
       
-      // 🔥 FLUJO CORREGIDO:
+      // FLUJO CORREGIDO:
       // 1. MOZOS: Crean pedidos y entregan pedidos listos
       if (usuarioRol === 'Mozo') {
         if (pedido.estado === 'listo') {
@@ -484,20 +484,19 @@ function initModuloPedidos() {
       return botones.join(' ');
   }
 
-  // 🔥 NUEVA FUNCIÓN: Obtener clase CSS para el estado
   function obtenerClaseEstado(estado) {
     const clases = {
       'creado': 'bg-secondary',
       'en_cocina': 'bg-warning',
       'listo': 'bg-success',
-      'entregado': 'bg-primary', // 🔥 COLOR DIFERENTE PARA ENTREGADO
+      'entregado': 'bg-primary',
       'pagado': 'bg-info',
       'cancelado': 'bg-danger'
     };
     return clases[estado] || 'bg-secondary';
   }
 
-  // 🔄 Cambiar estado del pedido
+  // Cambiar estado del pedido
   window.cambiarEstadoPedido = async (pedidoId, nuevoEstado) => {
     if (!confirm(`¿Cambiar estado del pedido a "${obtenerTextoEstado(nuevoEstado)}"?`)) return;
 
@@ -515,7 +514,7 @@ function initModuloPedidos() {
         throw new Error(data.mensaje || 'Error al cambiar estado');
       }
 
-      alert('✅ Estado actualizado correctamente');
+      alert('Estado actualizado correctamente');
       await cargarPedidos();
       await cargarMesasParaPedido();
 
@@ -525,7 +524,7 @@ function initModuloPedidos() {
     }
   };
 
-  // 👁️ Ver detalles del pedido
+  // Ver detalles del pedido
   window.verDetallesPedido = async (pedidoId) => {
     try {
       const res = await fetch(`${apiURL}/${pedidoId}`, { credentials: 'include' });
@@ -551,11 +550,11 @@ function initModuloPedidos() {
 
     } catch (err) {
       console.error('Error cargando detalles:', err);
-      alert('❌ Error al cargar detalles del pedido');
+      alert(' Error al cargar detalles del pedido');
     }
   };
 
-    // 🔥 NUEVA FUNCIÓN: Verificar si un pedido puede ser editado (5 minutos límite)
+    // NUEVA FUNCIÓN: Verificar si un pedido puede ser editado (5 minutos límite)
   function puedeEditarPedido(fechaCreacion) {
     const fechaPedido = new Date(fechaCreacion);
     const ahora = new Date();
@@ -564,7 +563,7 @@ function initModuloPedidos() {
     return diferenciaMinutos <= 5; // 5 minutos límite
   }
 
-  // 🔥 NUEVA FUNCIÓN: Formatear tiempo restante para edición
+  // NUEVA FUNCIÓN: Formatear tiempo restante para edición
   function obtenerTiempoRestante(fechaCreacion) {
     const fechaPedido = new Date(fechaCreacion);
     const ahora = new Date();
@@ -574,7 +573,7 @@ function initModuloPedidos() {
     return minutosRestantes;
   }
 
-  // 🔥 NUEVA FUNCIÓN: Editar pedido
+  //NUEVA FUNCIÓN: Editar pedido
   window.editarPedido = async (pedidoId) => {
     try {
       const res = await fetch(`${apiURL}/${pedidoId}`, { credentials: 'include' });
@@ -587,7 +586,7 @@ function initModuloPedidos() {
       // Verificar si puede editar (5 minutos límite)
       if (!puedeEditarPedido(pedido.fechaCreacion)) {
         const minutosTranscurridos = Math.floor((new Date() - new Date(pedido.fechaCreacion)) / (1000 * 60));
-        alert(`❌ No puedes editar este pedido. Han pasado ${minutosTranscurridos} minutos (límite: 5 minutos)`);
+        alert(` No puedes editar este pedido. Han pasado ${minutosTranscurridos} minutos (límite: 5 minutos)`);
         return;
       }
 
@@ -596,11 +595,11 @@ function initModuloPedidos() {
       
     } catch (err) {
       console.error('Error editando pedido:', err);
-      alert('❌ Error al cargar pedido para editar');
+      alert('Error al cargar pedido para editar');
     }
   };
 
-  // 🔥 NUEVA FUNCIÓN: Cargar datos del pedido en formulario de edición
+  // Cargar datos del pedido en formulario de edición
   function cargarPedidoParaEdicion(pedido) {
     // Crear modal de edición
     const modalHtml = `
@@ -681,7 +680,7 @@ function initModuloPedidos() {
     document.body.appendChild(modalContainer);
   }
 
-  // 🔥 NUEVA FUNCIÓN: Cerrar modal de edición
+  // Cerrar modal de edición
   window.cerrarModalEdicion = function() {
     const modalContainer = document.getElementById('modalEdicionPedido');
     if (modalContainer) {
@@ -689,7 +688,7 @@ function initModuloPedidos() {
     }
   };
 
-  // 🔥 NUEVA FUNCIÓN: Guardar edición del pedido
+  // Guardar edición del pedido
   window.guardarEdicionPedido = async function(pedidoId) {
     try {
       // Recopilar datos del formulario
@@ -755,7 +754,7 @@ function initModuloPedidos() {
     return estados[estado] || estado;
   }
 
-  // 🔄 Event listeners
+  // Event listeners
   if (btnActualizar) {
     btnActualizar.addEventListener('click', cargarPedidos);
   }

@@ -1,5 +1,5 @@
 function initModuloAuditoria() {
-  console.log("📊 Módulo Auditoría iniciado.");
+  console.log("Módulo Auditoría iniciado.");
 
   // Referencias a elementos
   const formFiltros = document.getElementById('formFiltrosAuditoria');
@@ -51,7 +51,7 @@ function initModuloAuditoria() {
     }
   })();
 
-  // 📋 Cargar módulos para filtro
+  // Cargar módulos para filtro
   async function cargarModulos() {
     try {
       const res = await fetch(`${apiURL}/modulos`, { credentials: 'include' });
@@ -70,7 +70,7 @@ function initModuloAuditoria() {
     }
   }
 
-  // 📊 Cargar registros de auditoría
+  // Cargar registros de auditoría
   async function cargarAuditoria(filtros = {}) {
     try {
       const params = new URLSearchParams();
@@ -102,7 +102,7 @@ function initModuloAuditoria() {
           <td><span class="badge badge-accion">${registro.accion}</span></td>
           <td>
             <button class="btn btn-sm btn-outline-info" onclick="mostrarDetallesAuditoria(${JSON.stringify(registro.detalles).replace(/"/g, '&quot;')})">
-              📋 Ver detalles
+              Ver detalles
             </button>
           </td>
         </tr>
@@ -114,7 +114,7 @@ function initModuloAuditoria() {
     }
   }
 
-  // 🔍 Aplicar filtros
+  // Aplicar filtros
   formFiltros.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -128,9 +128,8 @@ function initModuloAuditoria() {
     await cargarAuditoria(filtros);
   });
 
-  // 🗑️ Eliminar registros antiguos
+  // Eliminar registros antiguos
   btnEliminarAntiguos.addEventListener('click', () => {
-    // Establecer fecha por defecto (hace 30 días)
     const hace30Dias = new Date();
     hace30Dias.setDate(hace30Dias.getDate() - 30);
     document.getElementById('fechaLimiteEliminar').value = hace30Dias.toISOString().split('T')[0];
@@ -164,17 +163,17 @@ function initModuloAuditoria() {
         throw new Error(data.mensaje || 'Error al eliminar registros');
       }
 
-      alert(`✅ ${data.mensaje}\nRegistros eliminados: ${data.registrosEliminados}`);
+      alert(`Registros eliminados correctamente.\n${data.mensaje}\nTotal eliminados: ${data.registrosEliminados}`);
       ocultarModal(modalEliminarAntiguos);
       await cargarAuditoria();
 
     } catch (err) {
       console.error('Error eliminando registros antiguos:', err);
-      alert('❌ Error: ' + err.message);
+      alert('Error: ' + err.message);
     }
   });
 
-  // 💥 Eliminar TODOS los registros
+  // Eliminar TODOS los registros
   btnEliminarTodo.addEventListener('click', () => {
     confirmacionEliminarTodo.value = '';
     btnConfirmarEliminarTodo.disabled = true;
@@ -211,17 +210,17 @@ function initModuloAuditoria() {
         throw new Error(data.mensaje || 'Error al eliminar registros');
       }
 
-      alert(`✅ ${data.mensaje}\nRegistros eliminados: ${data.registrosEliminados}`);
+      alert(`Registros eliminados correctamente.\n${data.mensaje}\nTotal eliminados: ${data.registrosEliminados}`);
       ocultarModal(modalEliminarTodo);
       await cargarAuditoria();
 
     } catch (err) {
       console.error('Error eliminando todos los registros:', err);
-      alert('❌ Error: ' + err.message);
+      alert('Error: ' + err.message);
     }
   });
 
-  // 👁️ Mostrar detalles
+  // Mostrar detalles
   window.mostrarDetallesAuditoria = (detalles) => {
     alert('Detalles de la acción:\n\n' + JSON.stringify(detalles, null, 2));
   };

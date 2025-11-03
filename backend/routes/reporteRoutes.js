@@ -4,7 +4,6 @@ const reporteController = require('../controllers/reporteController');
 const auth = require('../middleware/authMiddleware');
 const rol = require('../middleware/rolMiddleware');
 
-// 🔹 RUTAS PROTEGIDAS (Solo Administrador)
 router.get('/ventas', auth, rol(['Administrador']), reporteController.reporteVentas);
 router.get('/mozos', auth, rol(['Administrador']), reporteController.reporteMozos);
 router.get('/mesas', auth, rol(['Administrador']), reporteController.reporteMesas);

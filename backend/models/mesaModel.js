@@ -26,6 +26,6 @@ const mesaSchema = new mongoose.Schema({
     default: 0, // Coordenada vertical en porcentaje (0–100)
   }
 
-}, { timestamps: true }); // Crea createdAt y updatedAt automáticamente
+}, { timestamps: true });
 
 module.exports = mongoose.model('Mesa', mesaSchema);

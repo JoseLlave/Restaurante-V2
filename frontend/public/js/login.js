@@ -12,9 +12,9 @@ form.addEventListener('submit', async (e) => {
   try {
     const res = await fetch('http://localhost:4000/api/usuarios/login', {
       method: 'POST',
-      credentials: 'include', // necesario para enviar cookies
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ correo, contrasena }) // 🔑 usamos 'contrasena' sin ñ
+      body: JSON.stringify({ correo, contrasena })
     });
 
     const data = await res.json();

@@ -1,27 +1,24 @@
 function initModuloUsuarios() {
-  console.log("🧩 Módulo Usuarios iniciado.");
+  console.log("Módulo Usuarios iniciado.");
 
-  // ================================
   //  Referencias a elementos
-  // ================================
+
   const tabla = document.getElementById('tablaUsuarios');
   const msg = document.getElementById('msgUsuarios');
   const formAgregarUsuario = document.getElementById('formAgregarUsuario');
 
   if (!tabla || !formAgregarUsuario) {
-    console.warn("⚠️ Elementos del módulo Usuarios no encontrados.");
+    console.warn("Elementos del módulo Usuarios no encontrados.");
     return;
   }
 
-  // ================================
-  // 🔹 Modo edición
-  // ================================
+  // Modo edición
+
   let modoEditar = false;
   let usuarioEditandoId = null;
 
-  // ================================
+
   //  Verificar autenticación y rol
-  // ================================
   (async () => {
     try {
       const res = await fetch('http://localhost:4000/api/usuarios/me', { credentials: 'include' });
@@ -42,9 +39,7 @@ function initModuloUsuarios() {
     }
   })();
 
-  // ================================
   // 👥 Cargar usuarios - CORREGIDO
-  // ================================
   async function cargarUsuarios() {
     msg.textContent = '';
     tabla.innerHTML = '<tr><td colspan="6" class="text-center">Cargando...</td></tr>';
@@ -65,7 +60,7 @@ function initModuloUsuarios() {
         return;
       }
 
-      // 🔥 CORREGIDO: Mostrar datos estáticos, sin selects inline
+      // CORREGIDO: Mostrar datos estáticos, sin selects inline
       tabla.innerHTML = usuarios.map(u => `
         <tr>
           <td>${u.nombre}</td>
@@ -102,9 +97,8 @@ function initModuloUsuarios() {
     }
   }
 
-  // ================================
-  // ✏️ Editar usuario
-  // ================================
+  //  Editar usuario
+
   window.editarUsuario = async (id) => {
     try {
       const res = await fetch(`http://localhost:4000/api/usuarios/${id}`, { credentials: 'include' });
@@ -154,9 +148,8 @@ function initModuloUsuarios() {
     }
   };
 
-  // ================================
-  // ➕ Crear / actualizar usuario - CORREGIDO
-  // ================================
+  // Crear / actualizar usuario - CORREGIDO
+
   formAgregarUsuario.addEventListener('submit', async e => {
     e.preventDefault();
     const msgCrear = document.getElementById('msgCrearUsuario');
@@ -175,7 +168,7 @@ function initModuloUsuarios() {
       };
 
       if (modoEditar && usuarioEditandoId) {
-        // 🔥 ACTUALIZAR usuario existente
+        // ACTUALIZAR usuario existente
         if (selectRol) datos.rol = selectRol.value;
         if (selectEstado) datos.estado = selectEstado.value;
         
@@ -191,7 +184,7 @@ function initModuloUsuarios() {
           body: JSON.stringify(datos)
         });
       } else {
-        // 🔥 CREAR nuevo usuario
+        // CREAR nuevo usuario
         if (!inputCorreo.value.trim() || !inputContrasena.value.trim()) {
           msgCrear.textContent = 'Correo y contraseña son obligatorios para crear usuario';
           msgCrear.className = 'msg text-danger';
@@ -217,7 +210,7 @@ function initModuloUsuarios() {
         return;
       }
 
-      msgCrear.textContent = modoEditar ? '✅ Usuario actualizado' : '✅ Usuario creado';
+      msgCrear.textContent = modoEditar ? 'Usuario actualizado' : 'Usuario creado';
       msgCrear.className = 'msg text-success';
 
       // Resetear formulario
@@ -231,9 +224,8 @@ function initModuloUsuarios() {
     }
   });
 
-  // ================================
-  // 🗑️ Eliminar usuario
-  // ================================
+  //  Eliminar usuario
+
   window.eliminarUsuario = async (id) => {
     if (!confirm('¿Estás seguro de eliminar este usuario?')) return;
 
@@ -250,17 +242,17 @@ function initModuloUsuarios() {
         return;
       }
 
-      alert('✅ Usuario eliminado correctamente');
+      alert('Usuario eliminado correctamente');
       await cargarUsuarios();
 
     } catch (err) {
       console.error(err);
-      alert('❌ Error de conexión');
+      alert('Error de conexión');
     }
   };
 
   // ================================
-  // 🔄 Resetear formulario
+  // Resetear formulario
   // ================================
   function resetearFormulario() {
     formAgregarUsuario.reset();
@@ -285,7 +277,7 @@ function initModuloUsuarios() {
   }
 
   // ================================
-  // 🎨 Función auxiliar para colores de roles
+  // Función auxiliar para colores de roles
   // ================================
   function obtenerColorRol(rol) {
     const colores = {

@@ -1,7 +1,7 @@
 const Auditoria = require('../models/auditoriaModel');
 const Usuario = require('../models/usuarioModel');
 
-// 📋 Obtener todos los registros de auditoría con filtros
+// Obtener todos los registros de auditoría con filtros
 exports.getAuditoria = async (req, res) => {
   try {
     const { fechaDesde, fechaHasta, rol, modulo } = req.query;
@@ -40,7 +40,7 @@ exports.getAuditoria = async (req, res) => {
   }
 };
 
-// 🔍 Obtener módulos únicos para filtros
+// Obtener módulos únicos para filtros
 exports.getModulos = async (req, res) => {
   try {
     const modulos = await Auditoria.distinct('modulo');
@@ -50,7 +50,7 @@ exports.getModulos = async (req, res) => {
   }
 };
 
-// 🗑️ Eliminar todos los registros de auditoría
+// Eliminar todos los registros de auditoría
 exports.eliminarAuditoria = async (req, res) => {
   try {
     const { confirmar } = req.body;
@@ -71,7 +71,7 @@ exports.eliminarAuditoria = async (req, res) => {
     const resultado = await Auditoria.deleteMany({});
     
     res.json({
-      mensaje: '✅ Todos los registros de auditoría han sido eliminados',
+      mensaje: 'Todos los registros de auditoría han sido eliminados',
       registrosEliminados: resultado.deletedCount
     });
 
@@ -81,7 +81,7 @@ exports.eliminarAuditoria = async (req, res) => {
   }
 };
 
-// 🗑️ Eliminar registros antiguos (por fecha)
+// Eliminar registros antiguos (por fecha)
 exports.eliminarAuditoriaAntigua = async (req, res) => {
   try {
     const { fechaLimite } = req.body;
@@ -106,7 +106,7 @@ exports.eliminarAuditoriaAntigua = async (req, res) => {
     });
     
     res.json({
-      mensaje: `✅ Registros de auditoría anteriores a ${fechaLimite} eliminados`,
+      mensaje: `Registros de auditoría anteriores a ${fechaLimite} eliminados`,
       registrosEliminados: resultado.deletedCount,
       fechaLimite: fechaLimite
     });

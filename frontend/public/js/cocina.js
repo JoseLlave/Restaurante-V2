@@ -1,5 +1,5 @@
 function initModuloCocina() {
-    console.log("👨‍🍳 Módulo Cocina iniciado.");
+    console.log("Módulo Cocina iniciado.");
     
     // Referencias
     const tarjetasContainer = document.getElementById('tarjetasPedidosContainer');
@@ -33,7 +33,7 @@ function initModuloCocina() {
 
     // Hacer función global para actualizaciones
     window.actualizarVistaCocina = function(nuevosPedidos) {
-        console.log("🔄 Actualizando vista de cocina");
+        console.log("Actualizando vista de cocina");
         if (Array.isArray(nuevosPedidos)) {
             pedidos = nuevosPedidos;
             renderizarTarjetas();
@@ -48,7 +48,7 @@ function initModuloCocina() {
                 url += `?estado=${filtroEstado.value}`;
             }
             
-            console.log("📡 Cargando pedidos desde:", url);
+            console.log("Cargando pedidos desde:", url);
             
             const res = await fetch(url, { 
                 credentials: 'include',
@@ -68,7 +68,7 @@ function initModuloCocina() {
                 throw new Error('Formato de datos inválido');
             }
             
-            console.log(`✅ Pedidos cargados: ${data.length} pedidos`);
+            console.log(`Pedidos cargados: ${data.length} pedidos`);
             pedidos = data;
             renderizarTarjetas();
             actualizarContadores();
@@ -100,12 +100,11 @@ function initModuloCocina() {
             return;
         }
         
-        // Filtrar pedidos que el cocinero puede ver (solo estados de cocina)
         const pedidosCocina = pedidos.filter(pedido => 
             ['creado', 'en_cocina', 'listo'].includes(pedido.estado)
         );
 
-        console.log(`🍽️ Pedidos en cocina: ${pedidosCocina.length} de ${pedidos.length} totales`);
+        console.log(`Pedidos en cocina: ${pedidosCocina.length} de ${pedidos.length} totales`);
 
         if (pedidosCocina.length === 0) {
             tarjetasContainer.innerHTML = `
@@ -190,19 +189,16 @@ function initModuloCocina() {
                 return;
             }
 
-            console.log("📋 Mostrando detalles del pedido:", pedidoId);
+            console.log("Mostrando detalles del pedido:", pedidoId);
 
-            // Llenar información básica
             document.getElementById('detalleMesa').textContent = `Mesa ${pedido.mesa?.numero || 'N/A'} (Piso ${pedido.mesa?.piso || 'N/A'})`;
             document.getElementById('detalleMozo').textContent = pedido.mozo?.nombre || 'N/A';
             document.getElementById('detalleFecha').textContent = pedido.fechaCreacion ? new Date(pedido.fechaCreacion).toLocaleString('es-PE') : 'N/A';
             
-            // Estado actual
             const detalleEstado = document.getElementById('detalleEstado');
             detalleEstado.textContent = obtenerTextoEstado(pedido.estado);
             detalleEstado.className = `badge bg-${obtenerColorEstado(pedido.estado)} fs-6`;
 
-            // Observaciones generales
             const observacionesContainer = document.getElementById('observacionesContainer');
             const detalleObservaciones = document.getElementById('detalleObservaciones');
             if (pedido.observacionesGenerales) {
@@ -212,7 +208,6 @@ function initModuloCocina() {
                 observacionesContainer.style.display = 'none';
             }
 
-            // Productos
             const detalleProductosBody = document.getElementById('detalleProductosBody');
             if (Array.isArray(pedido.items)) {
                 detalleProductosBody.innerHTML = pedido.items.map(item => `
@@ -222,7 +217,7 @@ function initModuloCocina() {
                         <td>${item.observaciones || '-'}</td>
                         <td>
                             <span class="badge bg-${item.estado === 'listo' ? 'success' : 'secondary'}">
-                                ${item.estado === 'listo' ? '✅ Listo' : '⏳ Pendiente'}
+                                ${item.estado === 'listo' ? 'Listo' : 'Pendiente'}
                             </span>
                         </td>
                     </tr>
@@ -231,11 +226,9 @@ function initModuloCocina() {
                 detalleProductosBody.innerHTML = '<tr><td colspan="4" class="text-center">No hay productos</td></tr>';
             }
 
-            // Botones para cambiar estado
             const cambiarEstadoContainer = document.getElementById('cambiarEstadoContainer');
             cambiarEstadoContainer.innerHTML = generarBotonesEstado(pedido);
 
-            // Mostrar modal
             mostrarModal(modalDetalles);
 
         } catch (error) {
@@ -249,7 +242,7 @@ function initModuloCocina() {
         const estadosSiguientes = {
             'creado': ['en_cocina'],
             'en_cocina': ['listo'],
-            'listo': [] // No hay siguiente estado desde "listo"
+            'listo': []
         };
 
         const estados = estadosSiguientes[pedido.estado] || [];
@@ -272,7 +265,7 @@ function initModuloCocina() {
         if (!confirm(`¿Cambiar estado del pedido a "${obtenerTextoEstado(nuevoEstado)}"?`)) return;
 
         try {
-            console.log(`🔄 Cambiando estado del pedido ${pedidoId} a ${nuevoEstado}`);
+            console.log(`Cambiando estado del pedido ${pedidoId} a ${nuevoEstado}`);
 
             const res = await fetch(`${apiURL}/${pedidoId}/estado`, {
                 method: 'PUT',
@@ -287,13 +280,13 @@ function initModuloCocina() {
                 throw new Error(data.mensaje || 'Error al cambiar estado');
             }
 
-            alert('✅ Estado actualizado correctamente');
+            alert('Estado actualizado correctamente');
             ocultarModal(modalDetalles);
-            await cargarPedidos(); // Recargar para ver cambios
+            await cargarPedidos();
 
         } catch (err) {
             console.error('Error cambiando estado:', err);
-            alert('❌ Error: ' + err.message);
+            alert('Error: ' + err.message);
         }
     };
 
@@ -306,14 +299,13 @@ function initModuloCocina() {
         const listos = pedidos.filter(p => p.estado === 'listo').length;
         const total = pedidos.length;
         
-        console.log(`📊 Contadores: Creados=${creados}, EnCocina=${enCocina}, Listos=${listos}, Total=${total}`);
+        console.log(`Contadores: Creados=${creados}, EnCocina=${enCocina}, Listos=${listos}, Total=${total}`);
         
         if (contadorCreados) contadorCreados.textContent = creados;
         if (contadorEnCocina) contadorEnCocina.textContent = enCocina;
         if (contadorListos) contadorListos.textContent = listos;
         if (contadorTotal) contadorTotal.textContent = total;
 
-        // Actualizar badge en sidebar
         const badgeCocina = document.getElementById('badge-cocina');
         if (badgeCocina) {
             const totalPendientes = creados + enCocina;
@@ -337,12 +329,12 @@ function initModuloCocina() {
 
     function obtenerTextoEstado(estado) {
         const estados = {
-            'creado': '🆕 Creado',
-            'en_cocina': '👨‍🍳 En Cocina',
-            'listo': '✅ Listo',
-            'entregado': '📦 Entregado',
-            'pagado': '💳 Pagado',
-            'cancelado': '❌ Cancelado'
+            'creado': 'Creado',
+            'en_cocina': 'En Cocina',
+            'listo': 'Listo',
+            'entregado': 'Entregado',
+            'pagado': 'Pagado',
+            'cancelado': 'Cancelado'
         };
         return estados[estado] || estado;
     }
@@ -388,7 +380,7 @@ function initModuloCocina() {
     // Actualizaciones automáticas cada 30 segundos
     function iniciarActualizacionesAutomaticas() {
         intervaloActualizacion = setInterval(() => {
-            console.log("🔄 Actualización automática de cocina");
+            console.log("Actualización automática de cocina");
             cargarPedidos();
         }, 30000);
     }
@@ -423,7 +415,7 @@ function initModuloCocina() {
         if (intervaloActualizacion) {
             clearInterval(intervaloActualizacion);
             intervaloActualizacion = null;
-            console.log("🧹 Limpiando actualizaciones automáticas de cocina");
+            console.log("Limpiando actualizaciones automáticas de cocina");
         }
     };
 }

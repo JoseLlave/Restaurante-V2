@@ -30,7 +30,6 @@ const auditoriaSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Índice para búsquedas rápidas por fecha y módulo
 auditoriaSchema.index({ fecha: -1 });
 auditoriaSchema.index({ modulo: 1 });
 auditoriaSchema.index({ usuario: 1 });

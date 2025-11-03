@@ -5,11 +5,11 @@ const Cliente = require('../models/clienteModel');
 // Crear una nueva reserva
 exports.crearReserva = async (req, res) => {
   try {
-    console.log('🔍 DATOS RECIBIDOS EN REQ.BODY:', req.body);
+    console.log('DATOS RECIBIDOS EN REQ.BODY:', req.body);
 
     const { dni, nombres, apellidos, telefono, correo, fecha, horaInicio, horaFin, mesa } = req.body;
 
-    // 1️⃣ Validaciones básicas
+    // Validaciones básicas
     const camposRequeridos = [
       { campo: 'dni', valor: dni },
       { campo: 'nombres', valor: nombres },
@@ -23,22 +23,22 @@ exports.crearReserva = async (req, res) => {
     const camposFaltantes = camposRequeridos.filter(campo => !campo.valor);
     
     if (camposFaltantes.length > 0) {
-      console.log('❌ CAMPOS FALTANTES:', camposFaltantes.map(c => c.campo));
+      console.log('CAMPOS FALTANTES:', camposFaltantes.map(c => c.campo));
       return res.status(400).json({ 
         mensaje: 'Todos los campos son obligatorios',
         camposFaltantes: camposFaltantes.map(c => c.campo)
       });
     }
 
-    console.log('✅ Todos los campos están presentes');
+    console.log('Todos los campos están presentes');
 
-    // 2️⃣ Buscar si el cliente ya existe por su DNI
+    // Buscar si el cliente ya existe por su DNI
     let cliente = await Cliente.findOne({ dni });
-    console.log('👤 Cliente encontrado:', cliente ? 'Sí' : 'No');
+    console.log('Cliente encontrado:', cliente ? 'Sí' : 'No');
 
-    // 3️⃣ Si no existe, lo crea automáticamente
+    // Si no existe, lo crea automáticamente
     if (!cliente) {
-      console.log('👤 Creando nuevo cliente...');
+      console.log('Creando nuevo cliente...');
       cliente = new Cliente({ 
         dni, 
         nombres, 
@@ -47,12 +47,12 @@ exports.crearReserva = async (req, res) => {
         correo: correo || '' 
       });
       await cliente.save();
-      console.log('✅ Cliente creado:', cliente._id);
+      console.log('Cliente creado:', cliente._id);
     } else {
-      console.log('✅ Cliente existente encontrado:', cliente._id);
+      console.log('Cliente existente encontrado:', cliente._id);
     }
 
-    // 4️⃣ Verificar que la mesa existe
+    //Verificar que la mesa existe
     const mesaExiste = await Mesa.findById(mesa);
     console.log('🪑 Mesa encontrada:', mesaExiste ? `Mesa ${mesaExiste.numero}` : 'No');
     
@@ -60,15 +60,15 @@ exports.crearReserva = async (req, res) => {
       return res.status(404).json({ mensaje: 'Mesa no encontrada' });
     }
 
-    // 5️⃣ Verificar que la mesa esté disponible
-    console.log('📊 Estado de la mesa:', mesaExiste.estado);
+    //Verificar que la mesa esté disponible
+    console.log('Estado de la mesa:', mesaExiste.estado);
     if (mesaExiste.estado !== 'Libre') {
       return res.status(400).json({ 
         mensaje: `La mesa no está disponible. Estado actual: ${mesaExiste.estado}` 
       });
     }
 
-    // 6️⃣ Verificar que no hay reservas superpuestas
+    // Verificar que no hay reservas superpuestas
     const reservaExistente = await Reserva.findOne({
       mesa: mesa,
       fecha: fecha,
@@ -84,16 +84,15 @@ exports.crearReserva = async (req, res) => {
     });
 
     if (reservaExistente) {
-      console.log('❌ Reserva superpuesta encontrada');
+      console.log('Reserva superpuesta encontrada');
       return res.status(400).json({ 
         mensaje: 'Ya existe una reserva para esta mesa en el horario seleccionado' 
       });
     }
 
-    // 7️⃣ Crear la reserva
-    console.log('📅 Creando reserva...');
+    // Crear la reserva
+    console.log('Creando reserva...');
     
-    // 🔥 CORREGIR: No enviar codigoReserva o generar uno único
     const nuevaReserva = new Reserva({
       cliente: cliente._id,
       fecha,
@@ -101,22 +100,21 @@ exports.crearReserva = async (req, res) => {
       horaFin,
       mesa,
       estado: 'Reservada'
-      // 🔥 codigoReserva se genera automáticamente en el pre-save
     });
 
     await nuevaReserva.save();
-    console.log('✅ Reserva creada:', nuevaReserva._id);
+    console.log('Reserva creada:', nuevaReserva._id);
 
-    // 8️⃣ Cambiar estado de la mesa a "Reservada"
+    //Cambiar estado de la mesa a "Reservada"
     await Mesa.findByIdAndUpdate(mesa, { estado: 'Reservada' });
-    console.log('✅ Estado de mesa actualizado a Reservada');
+    console.log('Estado de mesa actualizado a Reservada');
 
-    // 9️⃣ Obtener la reserva con datos poblados para la respuesta
+    // Obtener la reserva con datos poblados para la respuesta
     const reservaCompleta = await Reserva.findById(nuevaReserva._id)
       .populate('cliente')
       .populate('mesa', 'numero capacidad piso');
 
-    console.log('🎉 RESERVA CREADA EXITOSAMENTE');
+    console.log('RESERVA CREADA EXITOSAMENTE');
     
     res.status(201).json({ 
       mensaje: 'Reserva creada correctamente', 
@@ -124,12 +122,12 @@ exports.crearReserva = async (req, res) => {
     });
 
   } catch (error) {
-    console.error('❌ ERROR COMPLETO AL CREAR RESERVA:', error);
+    console.error('ERROR COMPLETO AL CREAR RESERVA:', error);
     
-    // 🔥 MANEJO ESPECÍFICO DEL ERROR DE DUPLICADO
+
     if (error.code === 11000) {
       // Error de clave duplicada en codigoReserva
-      console.log('🔄 Reintentando crear reserva con nuevo código...');
+      console.log('Reintentando crear reserva con nuevo código...');
       
       try {
         // Intentar crear la reserva de nuevo (se generará nuevo código automáticamente)
@@ -157,7 +155,7 @@ exports.crearReserva = async (req, res) => {
         });
         
       } catch (retryError) {
-        console.error('❌ Error en reintento:', retryError);
+        console.error('Error en reintento:', retryError);
         return res.status(500).json({ 
           mensaje: 'Error al crear reserva después de reintento' 
         });

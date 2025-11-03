@@ -396,5 +396,10 @@ function initModuloMesas() {
   cargarMesas();
 }
 
+window.cleanupMesas = function() {
+    console.log("🧹 Limpiando recursos del módulo mesas");
+    // Limpiar cualquier intervalo o evento específico del admin
+};
+
 // Ejecutar cuando cargue el documento
 document.addEventListener("DOMContentLoaded", initModuloMesas);

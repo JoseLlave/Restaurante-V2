@@ -1,0 +1,152 @@
+<div class="cocina-module container my-4">
+  <h2 class="section-title mb-3">👨‍🍳 Cocina - Gestión de Pedidos</h2>
+
+  <!-- Alert informativo -->
+  <div class="alert alert-info d-flex align-items-center">
+    <i class="fas fa-info-circle me-2"></i>
+    <span>Gestiona el estado de preparación de los pedidos. Solo puedes cambiar el estado.</span>
+  </div>
+
+  <!-- Filtros -->
+  <div class="card mb-4 bg-dark text-light p-3 rounded-4 sombra-suave">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-4">
+        <label for="filtroEstadoCocina" class="form-label">Filtrar por estado:</label>
+        <select id="filtroEstadoCocina" class="form-control campo-oscuro">
+          <option value="todos">Todos los estados</option>
+          <option value="creado">🆕 Creado</option>
+          <option value="en_cocina">👨‍🍳 En Cocina</option>
+          <option value="listo">✅ Listo</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">&nbsp;</label>
+        <button id="btnActualizarCocina" class="btn btn-primary w-100">
+          <i class="fas fa-sync-alt"></i> Actualizar
+        </button>
+      </div>
+      <div class="col-md-4">
+        <div class="text-center">
+          <div class="text-warning">
+            <small><i class="fas fa-sync-alt"></i> Actualización automática cada 30 segundos</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contadores -->
+  <div class="row mb-4 text-center">
+    <div class="col-md-3 mb-3">
+      <div class="card bg-warning text-white">
+        <div class="card-body py-3">
+          <h3 id="contadorCreados" class="contador-pedidos">0</h3>
+          <small><i class="fas fa-clock"></i> Pendientes</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card bg-info text-white">
+        <div class="card-body py-3">
+          <h3 id="contadorEnCocina" class="contador-pedidos">0</h3>
+          <small><i class="fas fa-utensils"></i> En Cocina</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card bg-success text-white">
+        <div class="card-body py-3">
+          <h3 id="contadorListos" class="contador-pedidos">0</h3>
+          <small><i class="fas fa-check"></i> Listos</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card bg-secondary text-white">
+        <div class="card-body py-3">
+          <h3 id="contadorTotal" class="contador-pedidos">0</h3>
+          <small><i class="fas fa-list"></i> Total</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarjetas de Pedidos -->
+  <div id="tarjetasPedidosContainer" class="row">
+    <div class="col-12 text-center">
+      <div class="text-muted">
+        <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+        <p>Cargando pedidos...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detalles del Pedido -->
+<div class="modal fade" id="modalDetallesPedido" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDetallesTitulo">
+          <i class="fas fa-receipt"></i> Detalles del Pedido
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Información del Pedido -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h6><i class="fas fa-table"></i> Información del Pedido</h6>
+            <p><strong>Mesa:</strong> <span id="detalleMesa">-</span></p>
+            <p><strong>Mozo:</strong> <span id="detalleMozo">-</span></p>
+            <p><strong>Fecha:</strong> <span id="detalleFecha">-</span></p>
+          </div>
+          <div class="col-md-6">
+            <h6><i class="fas fa-info-circle"></i> Estado Actual</h6>
+            <div class="mb-3">
+              <span id="detalleEstado" class="badge bg-secondary fs-6">-</span>
+            </div>
+            <div id="cambiarEstadoContainer">
+              <!-- Se llena dinámicamente -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Observaciones Generales -->
+        <div class="mb-4" id="observacionesContainer" style="display: none;">
+          <h6><i class="fas fa-sticky-note"></i> Observaciones Generales</h6>
+          <div class="alert alert-info">
+            <span id="detalleObservaciones">-</span>
+          </div>
+        </div>
+
+        <!-- Productos del Pedido -->
+        <div>
+          <h6><i class="fas fa-utensils"></i> Productos del Pedido</h6>
+          <div class="table-responsive">
+            <table class="table table-dark table-sm">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Observaciones</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="detalleProductosBody">
+                <!-- Se llena dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enlace al CSS y JS -->
+<link rel="stylesheet" href="../public/css/cocina.css">
+<script src="../public/js/cocina.js"></script>

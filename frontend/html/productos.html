@@ -1,0 +1,76 @@
+<div class="productos-module container my-4">
+  <h2 class="section-title mb-3">🍽️ Gestión de Carta - Productos</h2>
+
+  <!-- FORMULARIO CREAR PRODUCTO -->
+  <div class="card mb-4 bg-dark text-light p-3 rounded-4 sombra-suave">
+    <h5 class="mb-3" id="tituloFormProducto">➕ Crear Producto</h5>
+    <form id="formProducto" class="row g-3">
+      <input type="hidden" id="productoIdEditar" value="">
+      
+      <div class="col-md-3">
+        <input type="text" id="nombreProducto" class="form-control campo-oscuro" placeholder="Nombre del producto" required>
+      </div>
+      <div class="col-md-3">
+        <select id="categoriaProducto" class="form-control campo-oscuro" required>
+          <option value="">Seleccionar categoría</option>
+          <option value="Entrada">Entrada</option>
+          <option value="Plato Principal">Plato Principal</option>
+          <option value="Postre">Postre</option>
+          <option value="Bebida">Bebida</option>
+          <option value="Acompañamiento">Acompañamiento</option>
+          <option value="Especialidad">Especialidad</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <input type="number" id="precioProducto" class="form-control campo-oscuro" placeholder="Precio" min="0" step="0.01" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" id="tiempoProducto" class="form-control campo-oscuro" placeholder="Tiempo (min)" min="1" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" id="stockProducto" class="form-control campo-oscuro" placeholder="Stock" min="0" required>
+      </div>
+      <div class="col-md-6">
+        <textarea id="descripcionProducto" class="form-control campo-oscuro" placeholder="Descripción (opcional)" rows="2"></textarea>
+      </div>
+      <div class="col-md-2">
+        <select id="estadoProducto" class="form-control campo-oscuro">
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" id="btnCrearActualizarProducto" class="btn btn-crear w-100">Crear</button>
+      </div>
+    </form>
+    <div id="msgCrearProducto" class="msg text-center mt-2"></div>
+  </div>
+
+  <!-- TABLA DE PRODUCTOS -->
+  <div class="card bg-dark text-light p-3 rounded-4 sombra-suave">
+    <h5 class="mb-3">📋 Productos Registrados</h5>
+    <div class="table-responsive mt-3">
+      <table class="table table-dark table-hover align-middle tabla-productos text-center">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Tiempo</th>
+            <th>Stock</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaProductosBody">
+          <tr><td colspan="8" class="text-center">Cargando productos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Enlace al CSS y JS -->
+<link rel="stylesheet" href="../public/css/productos.css">
+<script src="../public/js/productos.js"></script>

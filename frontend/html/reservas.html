@@ -10,7 +10,7 @@
         <option value="2">Piso 2</option>
       </select>
 
-      <label for="horaSimulada" class="form-label ms-3 mb-0">Hora:</label>
+      <label for="horaSimulada" class="form-label ms-3 mb-0">Hora simulación:</label>
       <input type="time" id="horaSimulada" class="form-control campo-oscuro w-auto d-inline-block ms-2" value="12:00">
 
       <button id="btnActualizarMapa" class="btn btn-outline-info btn-sm ms-3">🔄 Actualizar vista</button>
@@ -28,11 +28,12 @@
   <div class="row g-3">
     <!-- 🗺️ Mapa interactivo -->
     <div id="vistaMapa" class="col-md-7">
-      <div id="mapaReservasContainer" class="position-relative sombra-suave bg-dark">
+      <div id="mapaReservasContainer" class="position-relative sombra-suave bg-dark" style="height: 500px;">
         <!-- Imagen del plano -->
         <img id="imagenPisoReserva"
              src="../public/img/piso1.png"
-             alt="Plano del piso">
+             alt="Plano del piso"
+             style="width:100%; height:100%; object-fit: contain;">
 
         <!-- Contenedor de mesas -->
         <div id="mesasMapaReservas"></div>
@@ -51,22 +52,64 @@
         <h5 class="mb-3 text-center">➕ Nueva Reserva</h5>
 
         <!-- Datos del cliente -->
-        <input type="text" id="dniCliente" class="form-control campo-oscuro mb-2" placeholder="DNI del cliente" required>
-        <input type="text" id="nombreCliente" class="form-control campo-oscuro mb-2" placeholder="Nombres" required>
-        <input type="text" id="apellidoCliente" class="form-control campo-oscuro mb-2" placeholder="Apellidos" required>
-        <input type="text" id="telefonoCliente" class="form-control campo-oscuro mb-2" placeholder="Teléfono">
-        <input type="email" id="correoCliente" class="form-control campo-oscuro mb-3" placeholder="Correo">
+        <div class="mb-2">
+          <label for="dniCliente" class="form-label">DNI del cliente *</label>
+          <input type="text" id="dniCliente" class="form-control campo-oscuro" placeholder="Ej: 12345678" required maxlength="8">
+        </div>
+
+        <div class="mb-2">
+          <label for="nombreCliente" class="form-label">Nombres *</label>
+          <input type="text" id="nombreCliente" class="form-control campo-oscuro" placeholder="Ej: Juan Carlos" required>
+        </div>
+
+        <div class="mb-2">
+          <label for="apellidoCliente" class="form-label">Apellidos *</label>
+          <input type="text" id="apellidoCliente" class="form-control campo-oscuro" placeholder="Ej: Pérez García" required>
+        </div>
+
+        <div class="mb-2">
+          <label for="telefonoCliente" class="form-label">Teléfono</label>
+          <input type="text" id="telefonoCliente" class="form-control campo-oscuro" placeholder="Ej: 987654321" maxlength="9">
+        </div>
+
+        <div class="mb-3">
+          <label for="correoCliente" class="form-label">Correo electrónico</label>
+          <input type="email" id="correoCliente" class="form-control campo-oscuro" placeholder="Ej: cliente@ejemplo.com">
+        </div>
+
+        <hr>
 
         <!-- Datos de la reserva -->
-        <input type="date" id="fecha" class="form-control campo-oscuro mb-2" required>
-        <input type="time" id="horaInicio" class="form-control campo-oscuro mb-2" required>
-        <input type="time" id="horaFin" class="form-control campo-oscuro mb-2" required>
+        <div class="mb-2">
+          <label for="fecha" class="form-label">Fecha de reserva *</label>
+          <input type="date" id="fecha" class="form-control campo-oscuro" required>
+        </div>
 
-        <select id="mesa" class="form-control campo-oscuro mb-3" required>
-          <option value="">Seleccionar mesa</option>
-        </select>
+        <div class="row g-2 mb-2">
+          <div class="col-6">
+            <label for="horaInicio" class="form-label">Hora inicio *</label>
+            <input type="time" id="horaInicio" class="form-control campo-oscuro" required>
+          </div>
+          <div class="col-6">
+            <label for="horaFin" class="form-label">Hora fin *</label>
+            <input type="time" id="horaFin" class="form-control campo-oscuro" required>
+          </div>
+        </div>
 
-        <button class="btn btn-crear w-100" type="submit">Guardar Reserva</button>
+        <div class="mb-3">
+          <label for="mesa" class="form-label">Mesa *</label>
+          <select id="mesa" class="form-control campo-oscuro" required>
+            <option value="">Seleccionar mesa</option>
+          </select>
+        </div>
+
+        <button class="btn btn-crear w-100" type="submit">
+          ✅ Guardar Reserva
+        </button>
+
+        <div class="mt-2 text-center">
+          <small class="text-muted">* Campos obligatorios</small>
+        </div>
       </form>
     </div>
   </div>

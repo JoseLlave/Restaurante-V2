@@ -32,10 +32,16 @@ exports.crearPedido = async (req, res) => {
     const { mesaId, items, observacionesGenerales } = req.body;
     const mozoId = req.usuarioId; // El mozo que crea el pedido
 
-    // Validar que la mesa existe
     const mesa = await Mesa.findById(mesaId);
     if (!mesa) {
       return res.status(404).json({ mensaje: 'Mesa no encontrada' });
+    }
+
+    // 🔥 CORREGIDO: Permitir solo mesas Reservadas u Ocupadas para pedidos
+    if (!['Reservada', 'Ocupada'].includes(mesa.estado)) {
+      return res.status(400).json({ 
+        mensaje: `La mesa no está disponible para pedidos. Estado actual: ${mesa.estado}` 
+      });
     }
 
     // Validar que la mesa no esté ocupada con otro pedido activo
@@ -43,7 +49,7 @@ exports.crearPedido = async (req, res) => {
       mesa: mesaId, 
       estado: { $in: ['creado', 'en_cocina', 'listo'] } 
     });
-    
+
     if (pedidoActivo) {
       return res.status(400).json({ mensaje: 'La mesa ya tiene un pedido activo' });
     }
@@ -126,7 +132,7 @@ exports.actualizarEstado = async (req, res) => {
       return res.status(400).json({ mensaje: 'Estado no válido' });
     }
 
-    // 🔥 VALIDACIÓN: Cocinero solo puede cambiar entre estados de cocina
+    // 🔥 CORREGIDO: Permisos actualizados
     if (usuarioRol === 'Cocinero') {
       const estadosPermitidosCocinero = ['en_cocina', 'listo'];
       if (!estadosPermitidosCocinero.includes(estado)) {
@@ -134,24 +140,26 @@ exports.actualizarEstado = async (req, res) => {
           mensaje: 'No tienes permisos para cambiar a este estado. Estados permitidos: En Cocina, Listo' 
         });
       }
-      
-      // Obtener el pedido actual para validar transición
+    }
+
+    // 🔥 NUEVO: Permitir a Mozos cambiar a "entregado" desde "listo"
+    if (usuarioRol === 'Mozo') {
+      const estadosPermitidosMozo = ['entregado', 'cancelado'];
+      if (!estadosPermitidosMozo.includes(estado)) {
+        return res.status(403).json({ 
+          mensaje: 'No tienes permisos para cambiar a este estado. Estados permitidos: Entregado, Cancelado' 
+        });
+      }
+
+      // Validar que solo pueda cambiar a "entregado" desde "listo"
       const pedidoActual = await Pedido.findById(id);
       if (!pedidoActual) {
         return res.status(404).json({ mensaje: 'Pedido no encontrado' });
       }
-      
-      // Validar transiciones permitidas para cocinero
-      const transicionesPermitidas = {
-        'creado': ['en_cocina'],
-        'en_cocina': ['listo'],
-        'listo': [] // No se puede cambiar desde listo
-      };
-      
-      const estadosSiguientes = transicionesPermitidas[pedidoActual.estado] || [];
-      if (!estadosSiguientes.includes(estado)) {
+
+      if (estado === 'entregado' && pedidoActual.estado !== 'listo') {
         return res.status(403).json({ 
-          mensaje: `No puedes cambiar de "${pedidoActual.estado}" a "${estado}". Transición no permitida.` 
+          mensaje: 'Solo puedes entregar pedidos que estén en estado "Listo"' 
         });
       }
     }

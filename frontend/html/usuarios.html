@@ -1,30 +1,39 @@
 <div class="usuarios-module container my-4">
   <h2 class="section-title mb-3">👥 Gestión de Usuarios</h2>
 
-  <!-- FORMULARIO CREAR USUARIO -->
+  <!-- FORMULARIO CREAR/EDITAR USUARIO -->
   <div class="card mb-4 bg-dark text-light p-3 rounded-4 sombra-suave">
-    <h5 class="mb-3">➕ Crear Usuario</h5>
+    <h5 class="mb-3" id="tituloFormUsuario">➕ Crear Usuario</h5>
     <form id="formAgregarUsuario" class="row g-3">
+      <input type="hidden" id="usuarioIdEditar" value="">
+      
       <div class="col-md-3">
-        <input type="text" id="nuevoNombre" class="form-control campo-oscuro" placeholder="Nombre" required>
+        <input type="text" id="nuevoNombre" class="form-control campo-oscuro" placeholder="Nombre completo" required>
       </div>
       <div class="col-md-3">
-        <input type="email" id="nuevoCorreo" class="form-control campo-oscuro" placeholder="Correo" required>
+        <input type="email" id="nuevoCorreo" class="form-control campo-oscuro" placeholder="Correo electrónico" required>
       </div>
       <div class="col-md-2">
         <input type="password" id="nuevaContrasena" class="form-control campo-oscuro" placeholder="Contraseña" required minlength="6">
       </div>
       <div class="col-md-2">
         <select id="nuevoRol" class="form-control campo-oscuro" required>
-          <option value="">Rol</option>
+          <option value="">Seleccionar rol</option>
           <option value="Administrador">Administrador</option>
           <option value="Mozo">Mozo</option>
           <option value="Cocinero">Cocinero</option>
           <option value="Cajero">Cajero</option>
         </select>
       </div>
+      <div class="col-md-2" style="display: none;">
+        <label for="nuevoEstado" class="form-label">Estado:</label>
+        <select id="nuevoEstado" class="form-control campo-oscuro">
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </div>
       <div class="col-md-2">
-        <button type="submit" class="btn btn-crear w-100">Crear</button>
+        <button type="submit" id="btnCrearActualizar" class="btn btn-crear w-100">Crear</button>
       </div>
     </form>
     <div id="msgCrearUsuario" class="msg text-center mt-2"></div>
@@ -35,7 +44,7 @@
 
   <!-- TABLA DE USUARIOS -->
   <div class="card bg-dark text-light p-3 rounded-4 sombra-suave">
-    <h5 class="mb-3">📋 Usuarios</h5>
+    <h5 class="mb-3">📋 Usuarios del Sistema</h5>
     <div class="table-responsive mt-3">
       <table class="table table-dark table-hover align-middle tabla-usuarios">
         <thead>
@@ -45,7 +54,7 @@
             <th>Rol</th>
             <th>Estado</th>
             <th>Fecha Alta</th>
-            <th>Editar</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody id="tablaUsuarios">
@@ -58,3 +67,4 @@
 
 <!-- Enlace al CSS propio del módulo -->
 <link rel="stylesheet" href="../public/css/usuarios.css">
+<script src="../public/js/adminUsuarios.js"></script>

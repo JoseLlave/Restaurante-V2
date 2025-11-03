@@ -1,0 +1,61 @@
+<div class="reportes-module container my-4">
+  <h2 class="section-title mb-3">📈 Reportes del Sistema</h2>
+
+  <!-- FILTROS -->
+  <div class="card mb-4 bg-dark text-light p-3 rounded-4 sombra-suave">
+    <h5 class="mb-3">🔍 Configurar Reporte</h5>
+    <form id="formFiltrosReporte" class="row g-3">
+      <div class="col-md-3">
+        <label for="fechaDesde" class="form-label">Fecha Desde *</label>
+        <input type="date" id="fechaDesde" class="form-control campo-oscuro" required>
+      </div>
+      <div class="col-md-3">
+        <label for="fechaHasta" class="form-label">Fecha Hasta *</label>
+        <input type="date" id="fechaHasta" class="form-control campo-oscuro" required>
+      </div>
+      <div class="col-md-3">
+        <label for="tipoReporte" class="form-label">Tipo de Reporte *</label>
+        <select id="tipoReporte" class="form-control campo-oscuro" required>
+          <option value="">Seleccionar reporte</option>
+          <option value="ventas">📊 Ventas por Producto</option>
+          <option value="mozos">👥 Pedidos por Mozo</option>
+          <option value="mesas">🪑 Ocupación de Mesas</option>
+        </select>
+      </div>
+      <div class="col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary me-2">📈 Generar Reporte</button>
+        <button type="button" id="btnExportarExcel" class="btn btn-success" disabled>📤 Exportar Excel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- RESULTADOS -->
+  <div id="resultadosContainer" style="display: none;">
+    <!-- TARJETAS DE ESTADÍSTICAS -->
+    <div class="row mb-4" id="estadisticasContainer">
+      <!-- Se llenará dinámicamente -->
+    </div>
+
+    <!-- TABLA DE RESULTADOS -->
+    <div class="card bg-dark text-light p-3 rounded-4 sombra-suave">
+      <h5 class="mb-3" id="tituloResultados">Resultados del Reporte</h5>
+      <div class="table-responsive mt-3">
+        <table class="table table-dark table-hover align-middle tabla-reportes">
+          <thead id="tablaReportesHead">
+            <!-- Se llenará dinámicamente -->
+          </thead>
+          <tbody id="tablaReportesBody">
+            <tr><td colspan="6" class="text-center">Selecciona un reporte para generar</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENSAJES -->
+  <div id="msgReportes" class="mt-3 text-center"></div>
+</div>
+
+<!-- Enlace al CSS y JS -->
+<link rel="stylesheet" href="../public/css/reportes.css">
+<script src="../public/js/reportes.js"></script>

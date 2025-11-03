@@ -85,63 +85,61 @@
   color: #ff6b6b !important;
 }
 
-/* === Tabla de usuarios === */
-.tabla-usuarios {
-  width: 100%;
-  text-align: center; /* Centrar todo el contenido */
-}
-
+/* Estilos para la tabla de usuarios */
 .tabla-usuarios th {
-  background-color: #2d2d35;
-  color: #bb86fc;
-  border-bottom: 2px solid #bb86fc;
-  text-align: center;
+    background-color: #2a2a32;
+    color: #e2e8f0;
+    border-color: #3b3b45;
+    font-weight: 600;
 }
 
 .tabla-usuarios td {
-  background-color: #1e1e24;
-  color: #ddd;
-  vertical-align: middle;
-  text-align: center;
+    border-color: #3b3b45;
+    color: #e2e8f0;
 }
 
-.tabla-usuarios tr:hover td {
-  background-color: #292932;
+/* Badges para roles */
+.badge.bg-danger { background-color: #dc3545 !important; }
+.badge.bg-primary { background-color: #0d6efd !important; }
+.badge.bg-warning { background-color: #ffc107 !important; color: #000 !important; }
+.badge.bg-info { background-color: #0dcaf0 !important; }
+.badge.bg-success { background-color: #198754 !important; }
+.badge.bg-secondary { background-color: #6c757d !important; }
+
+/* Botones de acción */
+.btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
 }
 
-/* === Selects dentro de la tabla === */
-.tabla-usuarios select {
-  background-color: #2a2a32;
-  color: #fff;
-  border: 1px solid #3b3b45;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  text-align: center;
+.btn-outline-warning:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
 }
 
-.tabla-usuarios select:focus {
-  border-color: #bb86fc;
-  outline: none;
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
 }
 
-/* === Mejor separación entre secciones === */
-.usuarios-module h5 {
-  color: #d3b7ff;
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
 }
 
-/* === Animación de actualización exitosa === */
-@keyframes resaltarFila {
-  0% {
-    background-color: rgba(187, 134, 252, 0.3); /* Morado suave */
-  }
-  50% {
-    background-color: rgba(0, 255, 170, 0.4); /* Verde brillante */
-  }
-  100% {
-    background-color: transparent;
-  }
+/* Estados de formulario */
+#nuevoEstado {
+    display: none;
 }
 
+/* Animaciones */
 .fila-actualizada {
-  animation: resaltarFila 1.2s ease-in-out;
+    animation: highlight 1.5s ease;
+}
+
+@keyframes highlight {
+    0% { background-color: rgba(255, 193, 7, 0.3); }
+    100% { background-color: transparent; }
 }

@@ -1,0 +1,57 @@
+/* Estilos específicos para módulo de Productos */
+.productos-module .section-title {
+  color: #fff;
+  font-weight: 600;
+}
+
+.tabla-productos th {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border-bottom: 2px solid #34495e;
+}
+
+.tabla-productos td {
+  vertical-align: middle;
+  border-color: #34495e;
+}
+
+.campo-oscuro {
+  background-color: #2c3e50;
+  border: 1px solid #34495e;
+  color: #ecf0f1;
+}
+
+.campo-oscuro:focus {
+  background-color: #34495e;
+  border-color: #3498db;
+  color: #ecf0f1;
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.btn-crear {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-crear:hover {
+  background: linear-gradient(135deg, #219653, #27ae60);
+  transform: translateY(-1px);
+}
+
+.msg {
+  font-weight: 500;
+}
+
+.badge-activo {
+  background-color: #27ae60;
+}
+
+.badge-inactivo {
+  background-color: #e74c3c;
+}
+
+.sombra-suave {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}

@@ -15,28 +15,28 @@ h2, h5 {
 }
 
 .campo-oscuro {
-  background-color: #2a2a32 !important;
-  color: #fff !important;
-  border: 1px solid #3b3b45 !important;
+  background-color: #2a2a32;
+  color: #fff;
+  border: 1px solid #3b3b45;
   border-radius: 8px;
   padding: 6px 8px;
 }
 
 .campo-oscuro:focus {
-  border-color: #bb86fc !important;
-  box-shadow: 0 0 5px #bb86fc !important;
-  outline: none !important;
+  border-color: #bb86fc;
+  box-shadow: 0 0 5px #bb86fc;
+  outline: none;
 }
 
 /* 🌸 PLACEHOLDERS */
 .form-control.campo-oscuro::placeholder {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* 🟣 BOTÓN PRINCIPAL */
 .btn-crear {
-  background-color: #bb86fc !important;
-  color: #fff !important;
+  background-color: #bb86fc;
+  color: #fff;
   font-weight: 600;
   border: none;
   border-radius: 8px;
@@ -44,74 +44,75 @@ h2, h5 {
 }
 
 .btn-crear:hover {
-  background-color: #9a6df2 !important;
+  background-color: #9a6df2;
   transform: translateY(-1px);
 }
 
 /* 📦 TARJETAS */
 .card {
-  background-color: #1a1a1f !important;
+  background-color: #1a1a1f;
   border: 1px solid #2d2d35;
   border-radius: 12px;
 }
 
-/* === MAPA DE RESERVAS === */
-#mapaReservasContainer {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  border-radius: 12px;
-  background-color: #111;
-  border: 2px solid #444;
-  overflow: hidden;
-}
+/* ======================== */
+/* 🪑 ESTILOS PARA MESAS */
+/* ======================== */
 
-#imagenPisoReserva {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0.9;
-  border-radius: 10px;
-}
-
-#mesasMapaReservas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* 🪑 Mesas en el mapa */
 .mesa-circulo {
   position: absolute;
-  width: 42px;
-  height: 42px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
   font-weight: bold;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  font-size: 14px;
   cursor: pointer;
-  color: #fff;
-  transition: transform 0.15s ease, box-shadow 0.2s;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  z-index: 10;
 }
 
+/* 🟢 Estado LIBRE - Verde */
+.mesa-circulo.mesa-libre {
+  background-color: #27ae60;
+  border-color: #2ecc71;
+}
+
+/* 🟡 Estado RESERVADA - Amarillo/Naranja */
+.mesa-circulo.mesa-reservada {
+  background-color: #f39c12;
+  border-color: #e67e22;
+  animation: pulse 2s infinite;
+}
+
+/* 🔴 Estado OCUPADA - Rojo */
+.mesa-circulo.mesa-ocupada {
+  background-color: #e74c3c;
+  border-color: #c0392b;
+}
+
+/* 🔵 Mesa seleccionada - Azul */
+.mesa-circulo.mesa-seleccionada {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px #3498db;
+  transform: scale(1.1);
+}
+
+/* Animación para mesas reservadas */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Efecto hover */
 .mesa-circulo:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-}
-
-/* Colores según estado */
-.mesa-libre {
-  background-color: #00cc88;
-}
-.mesa-ocupada {
-  background-color: #ff4444;
-}
-.mesa-reservada {
-  background-color: #ffaa00;
+  z-index: 20;
 }
 
 /* 🕓 Reloj en vivo */
@@ -124,15 +125,16 @@ h2, h5 {
 
 /* === SELECTOR DE VISTA === */
 #vistaTipo {
-  background-color: #2a2a32 !important;
-  color: #fff !important;
-  border: 1px solid #3b3b45 !important;
+  background-color: #2a2a32;
+  color: #fff;
+  border: 1px solid #3b3b45;
   border-radius: 8px;
   padding: 6px 8px;
 }
+
 #vistaTipo:focus {
-  border-color: #bb86fc !important;
-  box-shadow: 0 0 5px #bb86fc !important;
+  border-color: #bb86fc;
+  box-shadow: 0 0 5px #bb86fc;
 }
 
 /* === TABLA DE RESERVAS === */
@@ -164,14 +166,14 @@ h2, h5 {
 }
 
 .bg-success {
-  background-color: #00cc88 !important;
+  background-color: #00cc88;
 }
 .bg-danger {
-  background-color: #ff4444 !important;
+  background-color: #ff4444;
 }
 .bg-warning {
-  background-color: #ffaa00 !important;
-  color: #000 !important;
+  background-color: #ffaa00;
+  color: #000;
 }
 
 /* === ANIMACIONES === */
@@ -190,7 +192,7 @@ h2, h5 {
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* === Ajuste adicional para centrar el mapa === */
+/* === CONTENEDOR DEL MAPA === */
 #mapaReservasContainer {
   width: 100%;
   height: 500px;
@@ -217,9 +219,28 @@ h2, h5 {
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* evita solapamiento con formulario */
 }
 
-.mesa-circulo {
-  pointer-events: auto;
+/* ======================== */
+/* 🎯 ESTILOS ESPECÍFICOS PARA ESTADOS */
+/* ======================== */
+
+/* Fuerza los colores para evitar conflictos */
+.mesa-circulo[class*="mesa-"] {
+  background-color: #27ae60 !important; /* Verde por defecto */
+}
+
+.mesa-circulo.mesa-reservada {
+  background-color: #f39c12 !important;
+  border-color: #e67e22 !important;
+}
+
+.mesa-circulo.mesa-ocupada {
+  background-color: #e74c3c !important;
+  border-color: #c0392b !important;
+}
+
+.mesa-circulo.mesa-libre {
+  background-color: #27ae60 !important;
+  border-color: #2ecc71 !important;
 }

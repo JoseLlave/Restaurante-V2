@@ -1,0 +1,148 @@
+/* ===== ESTILOS COCINA ===== */
+.cocina-module .card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cocina-module .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== TARJETAS DE PEDIDOS ===== */
+.tarjeta-pedido {
+    border-left: 4px solid #6c757d;
+    transition: all 0.3s ease;
+}
+
+.tarjeta-estado-creado {
+    border-left-color: #ffc107;
+}
+
+.tarjeta-estado-en_cocina {
+    border-left-color: #0dcaf0;
+}
+
+.tarjeta-estado-listo {
+    border-left-color: #198754;
+}
+
+.tarjeta-pedido .card-header {
+    background-color: #2a2a32;
+    border-bottom: 1px solid #3b3b45;
+    font-weight: 600;
+}
+
+.tarjeta-pedido .card-body {
+    background-color: #1a1a1f;
+}
+
+.tarjeta-pedido .card-footer {
+    background-color: #2a2a32;
+    border-top: 1px solid #3b3b45;
+}
+
+/* ===== CONTADORES ===== */
+.contador-pedidos {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+/* ===== LISTA DE PRODUCTOS ===== */
+.productos-lista {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.producto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid #3b3b45;
+    font-size: 0.9em;
+}
+
+.producto-item:last-child {
+    border-bottom: none;
+}
+
+.text-cantidad {
+    color: #bb86fc;
+    font-weight: 600;
+}
+
+/* ===== BOTONES DE ESTADO ===== */
+.btn-estado {
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-estado:hover {
+    transform: scale(1.05);
+}
+
+/* ===== MODAL DETALLES ===== */
+.modal-content {
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    border-bottom: 1px solid #3b3b45;
+    background: linear-gradient(135deg, #2a2a32 0%, #1a1a1f 100%);
+}
+
+.modal-footer {
+    border-top: 1px solid #3b3b45;
+    background-color: #2a2a32;
+}
+
+/* ===== BADGES ===== */
+.badge {
+    font-size: 0.8em;
+    padding: 6px 10px;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.tarjeta-pedido.actualizando {
+    animation: pulse 1s ease-in-out;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .contador-pedidos {
+        font-size: 1.5em;
+    }
+    
+    .tarjeta-pedido {
+        margin-bottom: 1rem;
+    }
+}
+
+/* ===== SCROLLBAR PERSONALIZADO ===== */
+.productos-lista::-webkit-scrollbar {
+    width: 6px;
+}
+
+.productos-lista::-webkit-scrollbar-track {
+    background: #2a2a32;
+    border-radius: 3px;
+}
+
+.productos-lista::-webkit-scrollbar-thumb {
+    background: #bb86fc;
+    border-radius: 3px;
+}
+
+.productos-lista::-webkit-scrollbar-thumb:hover {
+    background: #9a6df2;
+}

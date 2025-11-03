@@ -43,7 +43,7 @@ function initModuloUsuarios() {
   })();
 
   // ================================
-  // 👥 Cargar usuarios
+  // 👥 Cargar usuarios - CORREGIDO
   // ================================
   async function cargarUsuarios() {
     msg.textContent = '';
@@ -65,27 +65,31 @@ function initModuloUsuarios() {
         return;
       }
 
+      // 🔥 CORREGIDO: Mostrar datos estáticos, sin selects inline
       tabla.innerHTML = usuarios.map(u => `
         <tr>
           <td>${u.nombre}</td>
           <td>${u.correo}</td>
           <td>
-            <select onchange="actualizarRol('${u._id}', this.value)" class="form-select form-select-sm">
-              <option value="Administrador" ${u.rol === 'Administrador' ? 'selected' : ''}>Administrador</option>
-              <option value="Mozo" ${u.rol === 'Mozo' ? 'selected' : ''}>Mozo</option>
-              <option value="Cocinero" ${u.rol === 'Cocinero' ? 'selected' : ''}>Cocinero</option>
-              <option value="Cajero" ${u.rol === 'Cajero' ? 'selected' : ''}>Cajero</option>
-            </select>
+            <span class="badge bg-${obtenerColorRol(u.rol)}">
+              ${u.rol}
+            </span>
           </td>
           <td>
-            <select onchange="actualizarEstado('${u._id}', this.value)" class="form-select form-select-sm">
-              <option value="activo" ${u.estado === 'activo' ? 'selected' : ''}>Activo</option>
-              <option value="inactivo" ${u.estado === 'inactivo' ? 'selected' : ''}>Inactivo</option>
-            </select>
+            <span class="badge bg-${u.estado === 'activo' ? 'success' : 'danger'}">
+              ${u.estado}
+            </span>
           </td>
           <td>${new Date(u.fechaAlta).toLocaleString()}</td>
           <td>
-            <button class="btn btn-editar btn-sm" onclick="editarUsuario('${u.nombre}', '${u._id}')">Editar</button>
+            <button class="btn btn-sm btn-outline-warning me-1" onclick="editarUsuario('${u._id}')">
+              ✏️ Editar
+            </button>
+            ${u.rol !== 'Administrador' ? `
+              <button class="btn btn-sm btn-outline-danger" onclick="eliminarUsuario('${u._id}')">
+                🗑️ Eliminar
+              </button>
+            ` : '<span class="text-muted">No editable</span>'}
           </td>
         </tr>
       `).join('');
@@ -99,25 +103,59 @@ function initModuloUsuarios() {
   }
 
   // ================================
-  //  Editar usuario
+  // ✏️ Editar usuario
   // ================================
-  window.editarUsuario = (nombre, id) => {
-    const inputNombre = document.getElementById('nuevoNombre');
-    const inputCorreo = document.getElementById('nuevoCorreo');
-    const inputContrasena = document.getElementById('nuevaContrasena');
-    const selectRol = document.getElementById('nuevoRol');
+  window.editarUsuario = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:4000/api/usuarios/${id}`, { credentials: 'include' });
+      const usuario = await res.json();
 
-    inputNombre.value = nombre;
-    inputCorreo.disabled = true;
-    inputContrasena.disabled = true;
-    selectRol.disabled = true;
+      if (!res.ok) {
+        alert('Error al cargar usuario para editar');
+        return;
+      }
 
-    modoEditar = true;
-    usuarioEditandoId = id;
+      // Llenar formulario con datos del usuario
+      const inputNombre = document.getElementById('nuevoNombre');
+      const inputCorreo = document.getElementById('nuevoCorreo');
+      const inputContrasena = document.getElementById('nuevaContrasena');
+      const selectRol = document.getElementById('nuevoRol');
+      const selectEstado = document.getElementById('nuevoEstado');
+
+      inputNombre.value = usuario.nombre;
+      inputCorreo.value = usuario.correo;
+      inputCorreo.disabled = true; // No se puede cambiar el correo
+      inputContrasena.placeholder = 'Dejar vacío para no cambiar';
+      selectRol.value = usuario.rol;
+      selectEstado.value = usuario.estado;
+
+      // Mostrar campos de estado si están ocultos
+      if (selectEstado) {
+        selectEstado.style.display = 'block';
+        selectEstado.previousElementSibling.style.display = 'block';
+      }
+
+      // Cambiar texto del botón
+      const btnCrearActualizar = document.getElementById('btnCrearActualizar');
+      const tituloForm = document.getElementById('tituloFormUsuario');
+      
+      if (btnCrearActualizar) btnCrearActualizar.textContent = 'Actualizar';
+      if (tituloForm) tituloForm.textContent = '✏️ Editar Usuario';
+
+      modoEditar = true;
+      usuarioEditandoId = id;
+
+      // Scroll al formulario
+      formAgregarUsuario.scrollIntoView({ behavior: 'smooth' });
+
+    } catch (err) {
+      console.error('Error al editar usuario:', err);
+      alert('Error al cargar usuario');
+    }
   };
 
   // ================================
-  // ➕ Crear / actualizar usuario
+  // ➕ Crear / actualizar usuario - CORREGIDO
   // ================================
   formAgregarUsuario.addEventListener('submit', async e => {
     e.preventDefault();
@@ -128,27 +166,47 @@ function initModuloUsuarios() {
     const inputCorreo = document.getElementById('nuevoCorreo');
     const inputContrasena = document.getElementById('nuevaContrasena');
     const selectRol = document.getElementById('nuevoRol');
+    const selectEstado = document.getElementById('nuevoEstado');
 
     try {
       let res;
+      let datos = {
+        nombre: inputNombre.value.trim()
+      };
+
       if (modoEditar && usuarioEditandoId) {
+        // 🔥 ACTUALIZAR usuario existente
+        if (selectRol) datos.rol = selectRol.value;
+        if (selectEstado) datos.estado = selectEstado.value;
+        
+        // Solo incluir contraseña si se proporcionó una nueva
+        if (inputContrasena.value.trim()) {
+          datos.contraseña = inputContrasena.value.trim();
+        }
+
         res = await fetch(`http://localhost:4000/api/usuarios/${usuarioEditandoId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
-          body: JSON.stringify({ nombre: inputNombre.value.trim() })
+          body: JSON.stringify(datos)
         });
       } else {
+        // 🔥 CREAR nuevo usuario
+        if (!inputCorreo.value.trim() || !inputContrasena.value.trim()) {
+          msgCrear.textContent = 'Correo y contraseña son obligatorios para crear usuario';
+          msgCrear.className = 'msg text-danger';
+          return;
+        }
+
+        datos.correo = inputCorreo.value.trim();
+        datos.contraseña = inputContrasena.value.trim();
+        datos.rol = selectRol ? selectRol.value : 'Mozo';
+
         res = await fetch('http://localhost:4000/api/usuarios/registrar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
-          body: JSON.stringify({
-            nombre: inputNombre.value.trim(),
-            correo: inputCorreo.value.trim(),
-            contrasena: inputContrasena.value.trim(),
-            rol: selectRol.value
-          })
+          body: JSON.stringify(datos)
         });
       }
 
@@ -159,18 +217,12 @@ function initModuloUsuarios() {
         return;
       }
 
-      msgCrear.textContent = modoEditar ? ' Nombre actualizado' : ' Usuario creado';
+      msgCrear.textContent = modoEditar ? '✅ Usuario actualizado' : '✅ Usuario creado';
       msgCrear.className = 'msg text-success';
 
-      formAgregarUsuario.reset();
-      inputCorreo.disabled = false;
-      inputContrasena.disabled = false;
-      selectRol.disabled = false;
-
-      modoEditar = false;
-      usuarioEditandoId = null;
-
-      cargarUsuarios();
+      // Resetear formulario
+      resetearFormulario();
+      await cargarUsuarios();
 
     } catch (err) {
       console.error(err);
@@ -180,68 +232,68 @@ function initModuloUsuarios() {
   });
 
   // ================================
-  //  Actualizar rol
+  // 🗑️ Eliminar usuario
   // ================================
-  window.actualizarRol = async (id, rol) => {
-    msg.textContent = '';
+  window.eliminarUsuario = async (id) => {
+    if (!confirm('¿Estás seguro de eliminar este usuario?')) return;
+
     try {
       const res = await fetch(`http://localhost:4000/api/usuarios/${id}`, {
-        method: 'PUT',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ rol })
+        method: 'DELETE',
+        credentials: 'include'
       });
+
       const data = await res.json();
 
-      if (res.ok) {
-        msg.textContent = ' Rol actualizado';
-        msg.className = 'msg text-success';
-        const fila = document.querySelector(`button[onclick*="${id}"]`)?.closest('tr');
-        if (fila) {
-          fila.classList.add('fila-actualizada');
-          setTimeout(() => fila.classList.remove('fila-actualizada'), 1200);
-        }
-      } else {
-        msg.textContent = data.mensaje;
-        msg.className = 'msg text-danger';
+      if (!res.ok) {
+        alert(data.mensaje || 'Error al eliminar usuario');
+        return;
       }
 
+      alert('✅ Usuario eliminado correctamente');
+      await cargarUsuarios();
+
     } catch (err) {
-      msg.textContent = 'Error de conexión';
-      msg.className = 'msg text-danger';
+      console.error(err);
+      alert('❌ Error de conexión');
     }
   };
 
   // ================================
-  //  Actualizar estado
+  // 🔄 Resetear formulario
   // ================================
-  window.actualizarEstado = async (id, estado) => {
-    msg.textContent = '';
-    try {
-      const res = await fetch(`http://localhost:4000/api/usuarios/${id}`, {
-        method: 'PUT',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ estado })
-      });
-      const data = await res.json();
-
-      if (res.ok) {
-        msg.textContent = ' Estado actualizado';
-        msg.className = 'msg text-success';
-        const fila = document.querySelector(`button[onclick*="${id}"]`)?.closest('tr');
-        if (fila) {
-          fila.classList.add('fila-actualizada');
-          setTimeout(() => fila.classList.remove('fila-actualizada'), 1200);
-        }
-      } else {
-        msg.textContent = data.mensaje;
-        msg.className = 'msg text-danger';
-      }
-
-    } catch (err) {
-      msg.textContent = 'Error de conexión';
-      msg.className = 'msg text-danger';
+  function resetearFormulario() {
+    formAgregarUsuario.reset();
+    
+    const inputCorreo = document.getElementById('nuevoCorreo');
+    const inputContrasena = document.getElementById('nuevaContrasena');
+    const selectEstado = document.getElementById('nuevoEstado');
+    const btnCrearActualizar = document.getElementById('btnCrearActualizar');
+    const tituloForm = document.getElementById('tituloFormUsuario');
+    
+    if (inputCorreo) inputCorreo.disabled = false;
+    if (inputContrasena) inputContrasena.placeholder = 'Contraseña';
+    if (selectEstado) {
+      selectEstado.style.display = 'none';
+      selectEstado.previousElementSibling.style.display = 'none';
     }
-  };
+    if (btnCrearActualizar) btnCrearActualizar.textContent = 'Crear';
+    if (tituloForm) tituloForm.textContent = '➕ Crear Usuario';
+    
+    modoEditar = false;
+    usuarioEditandoId = null;
+  }
+
+  // ================================
+  // 🎨 Función auxiliar para colores de roles
+  // ================================
+  function obtenerColorRol(rol) {
+    const colores = {
+      'Administrador': 'danger',
+      'Mozo': 'primary',
+      'Cocinero': 'warning',
+      'Cajero': 'info'
+    };
+    return colores[rol] || 'secondary';
+  }
 }

@@ -11,15 +11,15 @@ router.post('/', auth, rol(['Mozo']), pedidoController.crearPedido);
 router.get('/mesa/:mesaId', auth, rol(['Mozo']), pedidoController.getPedidosPorMesa);
 
 // ================================
-// 🔹 RUTAS PARA VER PEDIDOS (MOZO + COCINERO)
+// 🔹 RUTAS PARA VER PEDIDOS (MOZO + COCINERO + ADMIN)
 // ================================
-router.get('/', auth, rol(['Mozo', 'Cocinero']), pedidoController.getPedidos);
-router.get('/:id', auth, rol(['Mozo', 'Cocinero']), pedidoController.getPedidoById);
+router.get('/', auth, rol(['Mozo', 'Cocinero', 'Administrador']), pedidoController.getPedidos);
+router.get('/:id', auth, rol(['Mozo', 'Cocinero', 'Administrador']), pedidoController.getPedidoById);
 
 // ================================
-// 🔹 RUTA PARA CAMBIAR ESTADO (SOLO COCINERO)
+// 🔹 RUTA PARA CAMBIAR ESTADO (MOZO + COCINERO + ADMIN) - 🔥 CORREGIDO
 // ================================
-router.put('/:id/estado', auth, rol(['Cocinero']), pedidoController.actualizarEstado);
+router.put('/:id/estado', auth, rol(['Mozo', 'Cocinero', 'Administrador']), pedidoController.actualizarEstado);
 
 // ================================
 // 🔹 RUTAS ADMIN (SOLO ELIMINAR)

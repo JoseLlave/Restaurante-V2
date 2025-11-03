@@ -1,0 +1,123 @@
+<div class="pedidos-module container my-4">
+  <h2 class="section-title mb-3">🍽️ Gestión de Pedidos - Mozo</h2>
+
+  <!-- CREAR NUEVO PEDIDO -->
+  <div class="card mb-4 bg-dark text-light p-3 rounded-4 sombra-suave">
+    <h5 class="mb-3">➕ Crear Nuevo Pedido</h5>
+    
+    <!-- Selección de Mesa -->
+    <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <label for="selectMesaPedido" class="form-label">Seleccionar Mesa *</label>
+        <select id="selectMesaPedido" class="form-control campo-oscuro" required>
+          <option value="">Seleccionar mesa</option>
+        </select>
+      </div>
+      <div class="col-md-8">
+        <label for="observacionesGenerales" class="form-label">Observaciones Generales</label>
+        <input type="text" id="observacionesGenerales" class="form-control campo-oscuro" placeholder="Observaciones para la cocina...">
+      </div>
+    </div>
+
+    <!-- Agregar Productos -->
+    <div class="card bg-dark border-secondary mb-3">
+      <div class="card-header">🛒 Agregar Productos al Pedido</div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <select id="selectProductoPedido" class="form-control campo-oscuro">
+              <option value="">Seleccionar producto</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <input type="number" id="cantidadProducto" class="form-control campo-oscuro" placeholder="Cantidad" min="1" value="1">
+          </div>
+          <div class="col-md-4">
+            <input type="text" id="observacionesItem" class="form-control campo-oscuro" placeholder="Observaciones del producto...">
+          </div>
+          <div class="col-md-2">
+            <button type="button" id="btnAgregarProducto" class="btn btn-success w-100">➕ Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Productos Agregados -->
+    <div class="table-responsive">
+      <table class="table table-dark table-sm">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unit.</th>
+            <th>Subtotal</th>
+            <th>Observaciones</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tablaItemsPedido">
+          <tr><td colspan="6" class="text-center text-muted">No hay productos agregados</td></tr>
+        </tbody>
+        <tfoot>
+          <tr class="table-active">
+            <td colspan="3" class="text-end"><strong>Total del Pedido:</strong></td>
+            <td id="totalPedido" class="text-success fw-bold">S/ 0.00</td>
+            <td colspan="2"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Botón Crear Pedido -->
+    <div class="text-center mt-3">
+      <button id="btnCrearPedido" class="btn btn-crear btn-lg" disabled>
+        ✅ Crear Pedido
+      </button>
+    </div>
+  </div>
+
+  <!-- LISTA DE PEDIDOS ACTIVOS -->
+  <div class="card bg-dark text-light p-3 rounded-4 sombra-suave">
+    <h5 class="mb-3">📋 Pedidos Activos</h5>
+    
+    <!-- Filtros -->
+    <div class="row g-3 mb-3">
+      <div class="col-md-3">
+        <select id="filtroEstadoPedido" class="form-control campo-oscuro">
+          <option value="todos">Todos los estados</option>
+          <option value="creado">🆕 Creado</option>
+          <option value="en_cocina">👨‍🍳 En Cocina</option>
+          <option value="listo">✅ Listo</option>
+          <option value="entregado">📦 Entregado</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button id="btnActualizarPedidos" class="btn btn-primary">🔄 Actualizar</button>
+      </div>
+    </div>
+
+    <!-- Tabla de Pedidos -->
+    <div class="table-responsive">
+      <table class="table table-dark table-hover align-middle">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Mesa</th>
+            <th>Fecha/Hora</th>
+            <th>Productos</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaPedidosBody">
+          <tr><td colspan="7" class="text-center">Cargando pedidos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Enlace al CSS y JS -->
+<link rel="stylesheet" href="../public/css/pedidos.css">
+<script src="../public/js/pedidos-mozo.js"></script>
